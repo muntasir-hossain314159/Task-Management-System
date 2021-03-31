@@ -2,11 +2,11 @@
 
 Team members:
 
-Ahmed Muntasir Hossain\n
-Jake Sullivan
-Emily Carlow
-Nathan Platt
-Anta Fall
+Ahmed Muntasir Hossain_
+Jake Sullivan_
+Emily Carlow_
+Nathan Platt_
+Anta Fall_
 
 The role of team members:
 
