@@ -1,7 +1,8 @@
 # Task-Management-System
 
 Team members:
-Ahmed Muntasir Hossain
+
+Ahmed Muntasir Hossain\n
 Jake Sullivan
 Emily Carlow
 Nathan Platt
