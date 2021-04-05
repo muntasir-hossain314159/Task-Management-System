@@ -27,12 +27,12 @@ public class AdminMenu extends Application{
         Text text0 = new Text("Admin Menu");
 
         //Creating Buttons
-        Button adminLoginInformation = new Button("Admin Login Information");
+        Button adminLoginInformation = new Button("Update Admin Login Information");
         adminLoginInformation.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
+                UpdateAdminAccount updateAdminAccount = new UpdateAdminAccount(ID);
+                updateAdminAccount.start(stage);
                 System.out.println("Admin Login button pushed");
-
-
             }
         });
 
