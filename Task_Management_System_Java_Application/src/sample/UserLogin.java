@@ -53,6 +53,7 @@ public class UserLogin extends Application /*implements ActionListener*/ {
 
                 try
                 {
+                    //todo
                     Connection connection = SetDatabaseConnection.getConnection();
                     //SELECT Approved_user_ID AS ID FROM approved_user_account WHERE Approved_username = '" + username + "' AND Approved_user_password = '" + password + "';
                     String sql = "SELECT User_ID AS ID FROM new_user_account WHERE Username LIKE BINARY'" + username + "' AND User_password LIKE BINARY '" + password + "';";

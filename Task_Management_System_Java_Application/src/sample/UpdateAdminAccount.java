@@ -64,12 +64,12 @@ public class UpdateAdminAccount
                 textField3.setText("");
                 textField4.setText("");
             }  });
-        Button loginReturn= new Button("Return to Admin LogIn Page");
-        loginReturn.setOnAction(new EventHandler<ActionEvent>() {
+        Button menuReturn= new Button("Return to Menu");
+        menuReturn.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                System.out.println("Return to LogIn Page button pushed");
-                AdminLogin adminLogin = new AdminLogin();
-                adminLogin.start(stage);
+                System.out.println("Return to Menu button pushed");
+                AdminMenu adminMenu = new AdminMenu();
+                adminMenu.start(stage);
             }  });
         GridPane gridPane1 = new GridPane();
         //gridPane1.setGridLinesVisible(true);
@@ -88,11 +88,11 @@ public class UpdateAdminAccount
         GridPane.setHalignment(submit, HPos.CENTER);
         gridPane1.add(clear, 0, 4,2,1);
         GridPane.setHalignment(clear, HPos.LEFT);
-        gridPane1.add(loginReturn,0, 4,2,1);
-        GridPane.setHalignment(loginReturn, HPos.RIGHT);
+        gridPane1.add(menuReturn,0, 4,2,1);
+        GridPane.setHalignment(menuReturn, HPos.RIGHT);
         submit.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         clear.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
-        loginReturn.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+        menuReturn.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         text0.setStyle("-fx-font: normal bold 20px 'serif' ");
         text3.setStyle("-fx-font: normal bold 20px 'serif' ");
         text4.setStyle("-fx-font: normal bold 20px 'serif' ");

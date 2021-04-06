@@ -43,6 +43,15 @@ public class AdminMenu extends Application{
             }
         });
 
+        Button newAdminAccount = new Button("Create New Admin Account");
+        newAdminAccount.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                System.out.println("Create New Admin Account button pushed");
+               CreateNewAdminAccount createNewAdminAccount = new CreateNewAdminAccount();
+               createNewAdminAccount.start(stage);
+            }
+        });
+
         Button logOut = new Button("Log Out");
         logOut.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -72,17 +81,24 @@ public class AdminMenu extends Application{
         //Arranging all the nodes in the grid
         gridPane.add(text0, 0, 0, 1, 1);
         GridPane.setHalignment(text0, HPos.CENTER);
-        gridPane.add(adminLoginInformation, 0, 1, 1, 1);
-        GridPane.setHalignment(adminLoginInformation, HPos.CENTER);
-        gridPane.add(newUserList, 0, 2, 1, 1);
+
+        gridPane.add(newUserList, 0, 1, 1, 1);
         GridPane.setHalignment(newUserList, HPos.CENTER);
-        gridPane.add(logOut, 0, 3, 1, 1);
+
+        gridPane.add(newAdminAccount, 0, 2, 1, 1);
+        GridPane.setHalignment(newAdminAccount, HPos.CENTER);
+
+        gridPane.add(adminLoginInformation, 0, 3, 1, 1);
+        GridPane.setHalignment(adminLoginInformation, HPos.CENTER);
+
+        gridPane.add(logOut, 0, 4, 1, 1);
         GridPane.setHalignment(logOut, HPos.CENTER);
 
 
         //Styling nodes
         adminLoginInformation.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         newUserList.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+        newAdminAccount.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         logOut.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         text0.setStyle("-fx-font: normal bold 20px 'serif' ");
         gridPane.setStyle("-fx-background-color: BEIGE;");
