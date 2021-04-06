@@ -38,9 +38,13 @@ public class CreateNewUserAccount extends Application {
                     Connection connection = SetDatabaseConnection.getConnection();
                     PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO new_user_account VALUES (0, '" + Username + "', '" + User_password + "', " + "1)");
                     preparedStatement.executeUpdate();
+                    UserLogin userLogin = new UserLogin();
+                    userLogin.start(stage);
                 }
                 catch (Exception e)
                 {
+                    //todo
+                    //an error message should show up if a user inputs a username that already exists
                     System.out.println(e);;
                 }
 
