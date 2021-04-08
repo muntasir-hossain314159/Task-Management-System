@@ -8,8 +8,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -40,6 +38,8 @@ public class AdminMenu extends Application{
         newUserList.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 System.out.println("New User List button pushed");
+                TableViewScreen tableViewScreen = new TableViewScreen(ID);
+                tableViewScreen.start(stage);
             }
         });
 

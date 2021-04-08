@@ -29,11 +29,9 @@ CREATE TABLE approved_user_account (
 									
 									PRIMARY KEY(Approved_user_ID),
                                     FOREIGN KEY (Approved_user_ID) REFERENCES new_user_account(User_ID)
-										ON UPDATE CASCADE
-                                        ON DELETE CASCADE,
+										ON UPDATE CASCADE,
                                     FOREIGN KEY (Approved_username) REFERENCES new_user_account(Username)
-										ON UPDATE CASCADE
-                                        ON DELETE CASCADE);
+										ON UPDATE CASCADE);
                                         
 CREATE TABLE task (
 					Task_ID					INT 			NOT NULL	 AUTO_INCREMENT,
