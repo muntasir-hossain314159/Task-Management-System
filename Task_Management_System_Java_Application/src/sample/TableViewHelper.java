@@ -5,9 +5,15 @@ import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import javax.swing.*;
@@ -120,7 +126,6 @@ public class TableViewHelper {
         return colBtn;
     }
 
-
     private static void insertNewUser(NewUser newUser) {
         int ID = newUser.getID();
         String username = newUser.getUsername();
@@ -168,6 +173,20 @@ public class TableViewHelper {
             System.out.println(e);
         }
     }
+
+    public static void refreshPage(Stage stage, int ID)
+    {
+        System.out.println("Page has been refreshed");
+        TableViewScreen tableViewScreen = new TableViewScreen(ID);
+        tableViewScreen.start(stage);
+    }
+
+    public static void returnToMenuPage(Stage stage)
+    {
+        AdminMenu adminMenu = new AdminMenu();
+        adminMenu.start(stage);
+    }
+
 
 
 
