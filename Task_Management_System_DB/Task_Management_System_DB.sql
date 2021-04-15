@@ -27,11 +27,7 @@ CREATE TABLE approved_user_account (
 									Approved_username		VARCHAR(50)		NOT NULL 		UNIQUE,
 									Approved_user_password	VARCHAR(50)		NOT NULL,
 									
-									PRIMARY KEY(Approved_user_ID),
-                                    FOREIGN KEY (Approved_user_ID) REFERENCES new_user_account(User_ID)
-										ON UPDATE CASCADE,
-                                    FOREIGN KEY (Approved_username) REFERENCES new_user_account(Username)
-										ON UPDATE CASCADE);
+									PRIMARY KEY(Approved_user_ID));
                                         
 CREATE TABLE task (
 					Task_ID					INT 			NOT NULL	 AUTO_INCREMENT,

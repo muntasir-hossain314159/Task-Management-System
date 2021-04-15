@@ -156,17 +156,17 @@ public class TableViewHelper {
 
         try
         {
-            String sql1 = "SET FOREIGN_KEY_CHECKS = 0;";
+            //String sql1 = "SET FOREIGN_KEY_CHECKS = 0;";
             String sql2 = "DELETE FROM new_user_account WHERE User_ID LIKE BINARY " + ID + ";";
-            String sql3 = "SET FOREIGN_KEY_CHECKS = 1;";
+            //String sql3 = "SET FOREIGN_KEY_CHECKS = 1;";
             Connection connection = SetDatabaseConnection.getConnection();
-            PreparedStatement preparedStatement1 = connection.prepareStatement(sql1);
+            //PreparedStatement preparedStatement1 = connection.prepareStatement(sql1);
             PreparedStatement preparedStatement2 = connection.prepareStatement(sql2);
-            PreparedStatement preparedStatement3 = connection.prepareStatement(sql3);
+            //PreparedStatement preparedStatement3 = connection.prepareStatement(sql3);
 
-            preparedStatement1.executeUpdate();
+            //preparedStatement1.executeUpdate();
             preparedStatement2.executeUpdate();
-            preparedStatement3.executeUpdate();
+            //preparedStatement3.executeUpdate();
         }
         catch (Exception e)
         {

@@ -14,6 +14,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.Calendar;
+
 public class UserMenu extends Application{
 
     private int ID;
@@ -31,8 +33,8 @@ public class UserMenu extends Application{
         calendar.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 System.out.println("calendar button pushed");
-
-
+                CalendarView calendar = new CalendarView();
+                calendar.run();
             }
         });
 

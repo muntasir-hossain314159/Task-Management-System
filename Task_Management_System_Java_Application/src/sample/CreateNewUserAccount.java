@@ -1,5 +1,6 @@
 package sample;
 
+import com.mysql.cj.protocol.Resultset;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class CreateNewUserAccount extends Application {
 
@@ -36,10 +38,19 @@ public class CreateNewUserAccount extends Application {
                 try
                 {
                     Connection connection = SetDatabaseConnection.getConnection();
-                    PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO new_user_account VALUES (0, '" + Username + "', '" + User_password + "', " + "1)");
-                    preparedStatement.executeUpdate();
-                    UserLogin userLogin = new UserLogin();
-                    userLogin.start(stage);
+                    String sql = "SELECT Approved_username AS username FROM approved_user_account WHERE Approved_username LIKE BINARY '" + Username + "';";
+                    PreparedStatement preparedStatement1 = connection.prepareStatement(sql);
+                    ResultSet resultSet = preparedStatement1.executeQuery();
+
+                    if(!resultSet.next())
+                    {
+                        PreparedStatement preparedStatement2 = connection.prepareStatement("INSERT INTO new_user_account VALUES (0, '" + Username + "', '" + User_password + "', " + "1)");
+                        preparedStatement2.executeUpdate();
+                        UserLogin userLogin = new UserLogin();
+                        userLogin.start(stage);
+                    }
+                    else
+                        throw new Exception("Error");
                 }
                 catch (Exception e)
                 {
