@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-public class CreateNewAdminAccount {
+public class CreateNewAdminAccount extends Application {
     public void start(Stage stage) {
         Text text0= new Text ("Create New Admin Account");
         Text text3 = new Text("New Admin Username");

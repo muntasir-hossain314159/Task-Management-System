@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -16,8 +17,7 @@ import javafx.stage.Stage;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-public class UpdateAdminAccount
-{
+public class UpdateAdminAccount extends Application {
     private int ID;
 
     public UpdateAdminAccount(int ID) {
