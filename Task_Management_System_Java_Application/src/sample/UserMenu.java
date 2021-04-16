@@ -33,10 +33,6 @@ public class UserMenu extends Application{
         calendar.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 System.out.println("calendar button pushed");
-                /*CalendarView calendar = new CalendarView();
-                calendar.run();
-                 */
-
                 DayAndMonthCalendarView dayAndMonthCalendarView = new DayAndMonthCalendarView();
                 dayAndMonthCalendarView.start(stage);
             }
@@ -46,6 +42,8 @@ public class UserMenu extends Application{
         task.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 System.out.println("Task button pushed");
+                Task task = new Task(ID);
+                task.start(stage);
             }
         });
 
