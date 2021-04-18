@@ -56,8 +56,7 @@ public class AdminLogin extends Application{
                     {
                         resultSet.next();
                         int ID = resultSet.getInt("ID");
-                        AdminMenu adminMenu = new AdminMenu();
-                        adminMenu.setID(ID);
+                        AdminMenu adminMenu = new AdminMenu(ID);
                         adminMenu.start(stage);
                     }
                     else if(count > 1)

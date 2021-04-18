@@ -8,20 +8,15 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import java.util.Calendar;
 
 public class UserMenu extends Application{
 
     private int ID;
 
-    public void setID(int ID)
-    {
+    public UserMenu(int ID) {
         this.ID = ID;
     }
 
@@ -33,17 +28,27 @@ public class UserMenu extends Application{
         calendar.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 System.out.println("calendar button pushed");
-                DayAndMonthCalendarView dayAndMonthCalendarView = new DayAndMonthCalendarView();
+                DayAndMonthCalendarView dayAndMonthCalendarView = new DayAndMonthCalendarView(ID);
                 dayAndMonthCalendarView.start(stage);
             }
         });
 
-        Button task = new Button("Task");
-        task.setOnAction(new EventHandler<ActionEvent>() {
+        Button searchForTasks = new Button("Search for Tasks");
+        searchForTasks.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                System.out.println("Search for Tasks button pushed");
+                SearchTasks searchTasks = new SearchTasks(ID);
+                searchTasks.start(stage);
+            }
+        });
+
+
+        Button createNewTask = new Button("Create New Task");
+        createNewTask.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 System.out.println("Task button pushed");
-                Task task = new Task(ID);
-                task.start(stage);
+                CreateNewTask createNewTask = new CreateNewTask(ID);
+                createNewTask.start(stage);
             }
         });
 
@@ -55,6 +60,11 @@ public class UserMenu extends Application{
                 userLogin.start(stage);
             }
         });
+
+        calendar.setMaxWidth(Double.MAX_VALUE);
+        createNewTask.setMaxWidth(Double.MAX_VALUE);
+        searchForTasks.setMaxWidth(Double.MAX_VALUE);
+        logOut.setMaxWidth(Double.MAX_VALUE);
 
         //Creating a Grid Pane
         GridPane gridPane = new GridPane();
@@ -78,16 +88,19 @@ public class UserMenu extends Application{
         GridPane.setHalignment(text0, HPos.CENTER);
         gridPane.add(calendar, 0, 1, 1, 1);
         GridPane.setHalignment(calendar, HPos.CENTER);
-        gridPane.add(task, 0, 2, 1, 1);
-        GridPane.setHalignment(task, HPos.CENTER);
-        gridPane.add(logOut, 0, 3, 1, 1);
+        gridPane.add(createNewTask, 0, 2, 1, 1);
+        GridPane.setHalignment(createNewTask, HPos.CENTER);
+        gridPane.add(searchForTasks, 0, 3, 1, 1);
+        GridPane.setHalignment(logOut, HPos.CENTER);
+        gridPane.add(logOut, 0, 4, 1, 1);
         GridPane.setHalignment(logOut, HPos.CENTER);
 
 
 
         //Styling nodes
         calendar.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
-        task.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+        createNewTask.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+        searchForTasks.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         logOut.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         text0.setStyle("-fx-font: normal bold 20px 'serif' ");
         gridPane.setStyle("-fx-background-color: BEIGE;");

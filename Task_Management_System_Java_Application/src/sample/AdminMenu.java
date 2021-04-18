@@ -16,8 +16,7 @@ public class AdminMenu extends Application{
 
     private int ID;
 
-    public void setID(int ID)
-    {
+    public AdminMenu(int ID) {
         this.ID = ID;
     }
 
@@ -38,8 +37,8 @@ public class AdminMenu extends Application{
         newUserList.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 System.out.println("New User List button pushed");
-                TableViewScreen tableViewScreen = new TableViewScreen(ID);
-                tableViewScreen.start(stage);
+                NewUserTableViewScreen newUserTableViewScreen = new NewUserTableViewScreen(ID);
+                newUserTableViewScreen.start(stage);
             }
         });
 
@@ -47,8 +46,8 @@ public class AdminMenu extends Application{
         newAdminAccount.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 System.out.println("Create New Admin Account button pushed");
-               CreateNewAdminAccount createNewAdminAccount = new CreateNewAdminAccount();
-               createNewAdminAccount.start(stage);
+                CreateNewAdminAccount createNewAdminAccount = new CreateNewAdminAccount(ID);
+                createNewAdminAccount.start(stage);
             }
         });
 

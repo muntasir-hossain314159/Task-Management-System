@@ -1,40 +1,36 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Callback;
+import javafx.scene.control.TableView;
 
-import java.util.Set;
 
-public class TableViewScreen extends Application {
+public class NewUserTableViewScreen extends Application {
 
     private int adminID;
-    public TableViewScreen(int ID)
+    public NewUserTableViewScreen(int ID)
     {
         this.adminID = ID;
     }
 
     public void start(Stage stage)
     {
-        TableView tableView = new TableView();
+        TableView<NewUser> tableView = new TableView<>();
 
         ObservableList<NewUser> newUserList = GetNewUserList.retrieveNewUserList(adminID);
         // Add rows to the TableView
         tableView.getItems().addAll(newUserList);
         // Add columns to the TableView
-        tableView.getColumns().addAll(TableViewHelper.getUsernameColumn(), TableViewHelper.getPasswordColumn(), TableViewHelper.addApproveButtonToTable(), TableViewHelper.addRejectButtonToTable());
+        tableView.getColumns().addAll(NewUserTableViewHelper.getUsernameColumn(), NewUserTableViewHelper.getPasswordColumn(), NewUserTableViewHelper.addApproveButtonToTable(), NewUserTableViewHelper.addRejectButtonToTable());
 
         //GridPane gridPane = TableViewHelper.getNewUserListGridPane(stage, adminID);
 
@@ -42,14 +38,14 @@ public class TableViewScreen extends Application {
         Button refreshButton = new Button("Refresh");
         refreshButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                TableViewHelper.refreshPage(stage, adminID);
+                NewUserTableViewHelper.refreshPage(stage, adminID);
             }
         });
 
         Button returnToAdminMenu = new Button("Return to Menu");
         returnToAdminMenu.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                TableViewHelper.returnToMenuPage(stage);
+                NewUserTableViewHelper.returnToMenuPage(stage, adminID);
             }
         });
 

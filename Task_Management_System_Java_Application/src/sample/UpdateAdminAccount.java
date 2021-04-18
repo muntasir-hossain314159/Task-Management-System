@@ -68,7 +68,7 @@ public class UpdateAdminAccount extends Application {
         menuReturn.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 System.out.println("Return to Menu button pushed");
-                AdminMenu adminMenu = new AdminMenu();
+                AdminMenu adminMenu = new AdminMenu(ID);
                 adminMenu.start(stage);
             }  });
         GridPane gridPane1 = new GridPane();

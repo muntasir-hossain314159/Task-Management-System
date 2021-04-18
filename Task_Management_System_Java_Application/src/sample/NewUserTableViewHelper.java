@@ -1,27 +1,19 @@
 package sample;
 
 
-import javafx.beans.Observable;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 
-public class TableViewHelper {
+public class NewUserTableViewHelper {
 
     public static TableColumn<NewUser, String> getUsernameColumn()
     {
@@ -177,13 +169,13 @@ public class TableViewHelper {
     public static void refreshPage(Stage stage, int ID)
     {
         System.out.println("Page has been refreshed");
-        TableViewScreen tableViewScreen = new TableViewScreen(ID);
-        tableViewScreen.start(stage);
+        NewUserTableViewScreen newUserTableViewScreen = new NewUserTableViewScreen(ID);
+        newUserTableViewScreen.start(stage);
     }
 
-    public static void returnToMenuPage(Stage stage)
+    public static void returnToMenuPage(Stage stage, int adminID)
     {
-        AdminMenu adminMenu = new AdminMenu();
+        AdminMenu adminMenu = new AdminMenu(adminID);
         adminMenu.start(stage);
     }
 

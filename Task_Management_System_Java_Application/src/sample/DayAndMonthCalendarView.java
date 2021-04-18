@@ -20,6 +20,12 @@ import java.time.LocalDate;
 
 public class DayAndMonthCalendarView extends Application {
 
+    private int userID;
+
+    public DayAndMonthCalendarView(int userID) {
+        this.userID = userID;
+    }
+
     public void start(Stage primaryStage) {
 
         Text text0 = new Text("Day & Month");
@@ -35,7 +41,7 @@ public class DayAndMonthCalendarView extends Application {
             public void handle(ActionEvent event) {
                 System.out.println("Year and Month View button pushed");
 
-                YearAndMonthCalendarView yearAndMonthCalendarView = new YearAndMonthCalendarView();
+                YearAndMonthCalendarView yearAndMonthCalendarView = new YearAndMonthCalendarView(userID);
                 yearAndMonthCalendarView.start(primaryStage);
             }
         });
@@ -44,7 +50,7 @@ public class DayAndMonthCalendarView extends Application {
         menu.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 System.out.println("Return button pushed");
-                UserMenu userMenu = new UserMenu();
+                UserMenu userMenu = new UserMenu(userID);
                 userMenu.start(primaryStage);
             }
         });
@@ -105,7 +111,7 @@ public class DayAndMonthCalendarView extends Application {
             public void handle(ActionEvent event) {
                 System.out.println("Return button pushed");
 
-                YearAndMonthCalendarView yearAndMonthCalendarView = new YearAndMonthCalendarView();
+                YearAndMonthCalendarView yearAndMonthCalendarView = new YearAndMonthCalendarView(userID);
                 yearAndMonthCalendarView.start(primaryStage);
             }
         });

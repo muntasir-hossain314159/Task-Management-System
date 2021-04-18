@@ -34,7 +34,7 @@ CREATE TABLE task (
                     User_ID					INT 			NOT NULL,
                     Start_date_time			TIMESTAMP		NOT NULL,		
                     End_date_time			TIMESTAMP		NOT NULL,
-                    Duration				VARCHAR(50)		NOT NULL,
+                    Duration				INT				NOT NULL,
                     Title					VARCHAR(50),
                     Description_of_task		VARCHAR(100),
                     

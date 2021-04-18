@@ -18,6 +18,12 @@ import javafx.stage.Stage;
 
 public class YearAndMonthCalendarView extends Application {
 
+    private int userID;
+
+    public YearAndMonthCalendarView(int userID) {
+        this.userID = userID;
+    }
+
     public void start(Stage stage)
     {
         //todo button that will take the user to the current date - call it return to current date
@@ -29,7 +35,7 @@ public class YearAndMonthCalendarView extends Application {
         TextField year = new TextField();
 
 
-        DayAndMonthCalendarView dayAndMonthCalendarView = new DayAndMonthCalendarView();
+        DayAndMonthCalendarView dayAndMonthCalendarView = new DayAndMonthCalendarView(userID);
 
         //Creating Buttons
         Button january = new Button("January");
@@ -247,7 +253,7 @@ public class YearAndMonthCalendarView extends Application {
         menu.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 System.out.println("Return button pushed");
-                UserMenu userMenu = new UserMenu();
+                UserMenu userMenu = new UserMenu(userID);
                 userMenu.start(stage);
             }
         });
@@ -257,7 +263,7 @@ public class YearAndMonthCalendarView extends Application {
             public void handle(ActionEvent event) {
                 System.out.println("Current Date button pushed");
 
-                DayAndMonthCalendarView dayAndMonthCalendarView = new DayAndMonthCalendarView();
+                DayAndMonthCalendarView dayAndMonthCalendarView = new DayAndMonthCalendarView(userID);
                 dayAndMonthCalendarView.start(stage);
             }
         });

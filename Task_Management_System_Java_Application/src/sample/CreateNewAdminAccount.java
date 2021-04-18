@@ -18,6 +18,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 public class CreateNewAdminAccount extends Application {
+
+    private int adminID;
+
+    public CreateNewAdminAccount(int adminID) {
+        this.adminID = adminID;
+    }
+
     public void start(Stage stage) {
         Text text0= new Text ("Create New Admin Account");
         Text text3 = new Text("New Admin Username");
@@ -61,7 +68,7 @@ public class CreateNewAdminAccount extends Application {
         menu.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 System.out.println("Return to menu button pushed");
-                AdminMenu adminMenu = new AdminMenu();
+                AdminMenu adminMenu = new AdminMenu(adminID);
                 adminMenu.start(stage);
             }  });
 

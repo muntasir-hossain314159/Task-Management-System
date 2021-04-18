@@ -71,8 +71,7 @@ public class UserLogin extends Application /*implements ActionListener*/ {
                     {
                         resultSet.next();
                         int ID = resultSet.getInt("ID");
-                        UserMenu userMenu = new UserMenu();
-                        userMenu.setID(ID);
+                        UserMenu userMenu = new UserMenu(ID);
                         userMenu.start(stage);
                     }
                     else if(count > 1)
