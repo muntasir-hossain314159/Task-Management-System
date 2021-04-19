@@ -10,6 +10,7 @@ public class GetTaskList {
 
     public static ObservableList<Task> retrieveTaskList(int userID, String startDate, String startTime, String endDate, String endTime, String duration, String title, String description)
     {
+        //todo description field does not work!!!
         String sql;
 
         if(!title.isEmpty() &&  startDate.isEmpty() && startTime.isEmpty() && endDate.isEmpty() && endTime.isEmpty() && duration.isEmpty() && description.isEmpty())
@@ -49,7 +50,7 @@ public class GetTaskList {
             sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND DATE(Start_date_time) = '" + startDate + "' AND Duration = '" + duration + "'";
 
         else if(!title.isEmpty() &&  startDate.isEmpty() && startTime.isEmpty() && endDate.isEmpty() && endTime.isEmpty() && duration.isEmpty() && !description.isEmpty())
-            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Title = '" + title + "' AND Duration = '" + duration + "'";
+            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Title = '" + title + "' AND Description LIKE '%" + description + "%'";
 
         else
             sql = "SELECT * FROM task WHERE User_ID = " + userID;
