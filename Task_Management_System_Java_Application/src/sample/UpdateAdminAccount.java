@@ -48,6 +48,8 @@ public class UpdateAdminAccount extends Application {
                 }
                 catch (Exception e)
                 {
+                    //error window
+                    new AccountExistsWarningScreen().start(new Stage());
                     System.out.println(e);;
                 }
 

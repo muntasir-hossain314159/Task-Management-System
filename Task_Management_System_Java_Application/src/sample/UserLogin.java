@@ -81,7 +81,9 @@ public class UserLogin extends Application /*implements ActionListener*/ {
                     else
                     {
                         System.out.println("Error, Wrong Password");
-                        //New Window saying error
+                        Stage stage1 = new Stage();
+                        UsernamePasswordWarningScreen usernamePasswordWarningScreen = new UsernamePasswordWarningScreen();
+                        usernamePasswordWarningScreen.start(stage1);
                     }
                 }
                 catch (Exception e)

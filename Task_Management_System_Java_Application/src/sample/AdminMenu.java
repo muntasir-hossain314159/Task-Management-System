@@ -42,6 +42,15 @@ public class AdminMenu extends Application{
             }
         });
 
+        Button approvedUserList = new Button("Approved User List");
+        approvedUserList.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                System.out.println("Approved User List button pushed");
+                ApprovedUserTableViewScreen approvedUserTableViewScreen = new ApprovedUserTableViewScreen(ID);
+                approvedUserTableViewScreen.start(stage);
+            }
+        });
+
         Button newAdminAccount = new Button("Create New Admin Account");
         newAdminAccount.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -74,6 +83,12 @@ public class AdminMenu extends Application{
         gridPane.setVgap(10);
         gridPane.setHgap(10);
 
+        newUserList.setMaxWidth(Double.MAX_VALUE);
+        approvedUserList.setMaxWidth(Double.MAX_VALUE);
+        newAdminAccount.setMaxWidth(Double.MAX_VALUE);
+        adminLoginInformation.setMaxWidth(Double.MAX_VALUE);
+        logOut.setMaxWidth(Double.MAX_VALUE);
+
         //Setting the Grid alignment
         gridPane.setAlignment(Pos.CENTER);
 
@@ -82,19 +97,22 @@ public class AdminMenu extends Application{
         GridPane.setHalignment(text0, HPos.CENTER);
 
         gridPane.add(newUserList, 0, 1, 1, 1);
-        GridPane.setHalignment(newUserList, HPos.CENTER);
+        //GridPane.setHalignment(newUserList, HPos.CENTER);
 
-        gridPane.add(newAdminAccount, 0, 2, 1, 1);
-        GridPane.setHalignment(newAdminAccount, HPos.CENTER);
+        gridPane.add(approvedUserList, 0, 2, 1, 1);
 
-        gridPane.add(adminLoginInformation, 0, 3, 1, 1);
-        GridPane.setHalignment(adminLoginInformation, HPos.CENTER);
+        gridPane.add(newAdminAccount, 0, 3, 1, 1);
+        //GridPane.setHalignment(newAdminAccount, HPos.CENTER);
 
-        gridPane.add(logOut, 0, 4, 1, 1);
-        GridPane.setHalignment(logOut, HPos.CENTER);
+        gridPane.add(adminLoginInformation, 0, 4, 1, 1);
+        //GridPane.setHalignment(adminLoginInformation, HPos.CENTER);
+
+        gridPane.add(logOut, 0, 5, 1, 1);
+        //GridPane.setHalignment(logOut, HPos.CENTER);
 
 
         //Styling nodes
+        approvedUserList.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         adminLoginInformation.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         newUserList.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         newAdminAccount.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");

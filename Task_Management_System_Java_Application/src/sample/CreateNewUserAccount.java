@@ -1,6 +1,5 @@
 package sample;
 
-import com.mysql.cj.protocol.Resultset;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -35,33 +34,41 @@ public class CreateNewUserAccount extends Application {
                 String Username = textField3.getText();
                 String User_password = textField4.getText();
 
-                try
+                if(User_password.length() < 8)
                 {
-                    Connection connection = SetDatabaseConnection.getConnection();
-                    String sql = "SELECT Approved_username AS username FROM approved_user_account WHERE Approved_username LIKE BINARY '" + Username + "';";
-                    PreparedStatement preparedStatement1 = connection.prepareStatement(sql);
-                    ResultSet resultSet = preparedStatement1.executeQuery();
-
-                    if(!resultSet.next())
+                    new PasswordLengthWarningScreen().start(new Stage());
+                }
+                else
+                {
+                    try
                     {
-                        PreparedStatement preparedStatement2 = connection.prepareStatement("INSERT INTO new_user_account VALUES (0, '" + Username + "', '" + User_password + "', " + "1)");
-                        preparedStatement2.executeUpdate();
-                        UserLogin userLogin = new UserLogin();
-                        userLogin.start(stage);
+                        Connection connection = SetDatabaseConnection.getConnection();
+                        String sql = "SELECT Approved_username AS username FROM approved_user_account WHERE Approved_username LIKE BINARY '" + Username + "';";
+                        PreparedStatement preparedStatement1 = connection.prepareStatement(sql);
+                        ResultSet resultSet = preparedStatement1.executeQuery();
+
+                        if(!resultSet.next())
+                        {
+                            PreparedStatement preparedStatement2 = connection.prepareStatement("INSERT INTO new_user_account VALUES (0, '" + Username + "', '" + User_password + "', " + "1)");
+                            preparedStatement2.executeUpdate();
+                            UserLogin userLogin = new UserLogin();
+                            userLogin.start(stage);
+                        }
+                        else
+                            throw new Exception("Error");
                     }
-                    else
-                        throw new Exception("Error");
-                }
-                catch (Exception e)
-                {
-                    //todo
-                    //an error message should show up if a user inputs a username that already exists
-                    System.out.println(e);;
-                }
+                    catch (Exception e)
+                    {
+                        //todo
+                        //an error message should show up if a user inputs a username that already exists
+                        new AccountExistsWarningScreen().start(new Stage());
+                        System.out.println(e);;
+                    }
 
-                System.out.print("New User's Email: " + Username + "\n");
-                System.out.print("New User's Password: " + User_password + "\n");
+                    System.out.print("New User's Email: " + Username + "\n");
+                    System.out.print("New User's Password: " + User_password + "\n");
 
+                }
                 textField3.setText("");
                 textField4.setText("");
             }  });

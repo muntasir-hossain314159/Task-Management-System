@@ -45,7 +45,7 @@ public class SearchTasksTableViewScreen extends Application {
 
         tableView.getItems().addAll(observableList);
 
-        tableView.getColumns().addAll(SearchTasksTableViewHelper.getTitleColumn(), SearchTasksTableViewHelper.getStartTime(), SearchTasksTableViewHelper.getEndTime(), SearchTasksTableViewHelper.getDuration(), SearchTasksTableViewHelper.getDescriptionOfTask());
+        tableView.getColumns().addAll(SearchTasksTableViewHelper.getTitleColumn(), SearchTasksTableViewHelper.getStartTime(), SearchTasksTableViewHelper.getEndTime(), SearchTasksTableViewHelper.getDuration(), SearchTasksTableViewHelper.getDescriptionOfTask(), SearchTasksTableViewHelper.addDeleteButtonToTable());
 
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         // Set the Placeholder for an empty table

@@ -39,19 +39,27 @@ public class CreateNewAdminAccount extends Application {
                 String Admin_username = textField3.getText();
                 String Admin_password = textField4.getText();
 
-                try
+                if(Admin_password.length() < 8)
                 {
-                    Connection connection = SetDatabaseConnection.getConnection();
-                    PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO admin_account VALUES (0, '" + Admin_username + "', '" + Admin_password + "')");
-                    preparedStatement.executeUpdate();
-                }
-                catch (Exception e)
-                {
-                    System.out.println(e);;
+                    new PasswordLengthWarningScreen().start(new Stage());
                 }
 
-                System.out.print("New User's Email: " + Admin_username + "\n");
-                System.out.print("New User's Password: " + Admin_password + "\n");
+                else
+                {
+                    try
+                    {
+                        Connection connection = SetDatabaseConnection.getConnection();
+                        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO admin_account VALUES (0, '" + Admin_username + "', '" + Admin_password + "')");
+                        preparedStatement.executeUpdate();
+                    }
+                    catch (Exception e)
+                    {
+                        new AccountExistsWarningScreen().start(new Stage());
+                        System.out.println(e);;
+                    }
+                    System.out.print("New Admin's Email: " + Admin_username + "\n");
+                    System.out.print("New Admin's Password: " + Admin_password + "\n");
+                }
 
                 textField3.setText("");
                 textField4.setText("");

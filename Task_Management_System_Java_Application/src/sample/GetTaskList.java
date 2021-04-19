@@ -32,7 +32,7 @@ public class GetTaskList {
             sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Duration = '" + duration + "'";
 
         else if(title.isEmpty() &&  startDate.isEmpty() && startTime.isEmpty() && endDate.isEmpty() && endTime.isEmpty() && duration.isEmpty() && !description.isEmpty())
-            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Description LIKE '%" + description + "%'";
+            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Description_of_task LIKE '%" + description + "%'";
 
         else if(!title.isEmpty() &&  !startDate.isEmpty() && startTime.isEmpty() && endDate.isEmpty() && endTime.isEmpty() && duration.isEmpty() && description.isEmpty())
             sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Title = '" + title + "' AND DATE(Start_date_time) = '" + startDate + "'";
@@ -50,7 +50,7 @@ public class GetTaskList {
             sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND DATE(Start_date_time) = '" + startDate + "' AND Duration = '" + duration + "'";
 
         else if(!title.isEmpty() &&  startDate.isEmpty() && startTime.isEmpty() && endDate.isEmpty() && endTime.isEmpty() && duration.isEmpty() && !description.isEmpty())
-            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Title = '" + title + "' AND Description LIKE '%" + description + "%'";
+            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Title = '" + title + "' AND Description_of_task LIKE '%" + description + "%'";
 
         else
             sql = "SELECT * FROM task WHERE User_ID = " + userID;
@@ -75,7 +75,7 @@ public class GetTaskList {
     private static ArrayList<Task> dataBaseArrayList(ResultSet resultSet) throws SQLException {
         ArrayList<Task> data =  new ArrayList<>();
         while (resultSet.next()) {
-            Task task = new Task(resultSet.getInt("Task_ID"), resultSet.getInt("User_ID"), resultSet.getTimestamp("Start_date_time"), resultSet.getTimestamp("End_date_time"), resultSet.getInt("Duration"), resultSet.getString("Title"), resultSet.getString("description_of_task"));
+            Task task = new Task(resultSet.getInt("Task_ID"), resultSet.getInt("User_ID"), resultSet.getTimestamp("Start_date_time"), resultSet.getTimestamp("End_date_time"), resultSet.getInt("Duration"), resultSet.getString("Title"), resultSet.getString("Description_of_task"));
             data.add(task);
         }
         return data;
