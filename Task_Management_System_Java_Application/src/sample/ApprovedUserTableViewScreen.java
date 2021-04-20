@@ -84,7 +84,7 @@ public class ApprovedUserTableViewScreen extends Application {
         // Add the Scene to the Stage
         stage.setScene(scene);
         // Set the Title of the Stage
-        stage.setTitle("New User List");
+        stage.setTitle("Approved User List");
 
         //stage.setFullScreen(true);
         // Display the Stage

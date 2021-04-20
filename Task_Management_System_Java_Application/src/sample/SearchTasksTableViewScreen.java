@@ -45,7 +45,7 @@ public class SearchTasksTableViewScreen extends Application {
 
         tableView.getItems().addAll(observableList);
 
-        tableView.getColumns().addAll(SearchTasksTableViewHelper.getTitleColumn(), SearchTasksTableViewHelper.getStartTime(), SearchTasksTableViewHelper.getEndTime(), SearchTasksTableViewHelper.getDuration(), SearchTasksTableViewHelper.getDescriptionOfTask(), SearchTasksTableViewHelper.addDeleteButtonToTable());
+        tableView.getColumns().addAll(SearchTasksTableViewHelper.getTitleColumn(), SearchTasksTableViewHelper.getStartTime(), SearchTasksTableViewHelper.getEndTime(), SearchTasksTableViewHelper.getDuration(), SearchTasksTableViewHelper.getDescriptionOfTask(), SearchTasksTableViewHelper.addEditButtonToTable(), SearchTasksTableViewHelper.addDeleteButtonToTable());
 
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         // Set the Placeholder for an empty table
@@ -82,7 +82,7 @@ public class SearchTasksTableViewScreen extends Application {
         VBox root = new VBox();
         // Add the Table to the VBox
         root.getChildren().addAll(tableView, hbox);
-        root.setPrefWidth(800);
+        root.setPrefWidth(1000);
         //root.setAlignment(Pos.CENTER);
         // Set the Padding and Border for the VBox
         root.setStyle("-fx-padding: 10;" +
@@ -97,7 +97,8 @@ public class SearchTasksTableViewScreen extends Application {
         // Add the Scene to the Stage
         stage.setScene(scene);
         // Set the Title of the Stage
-        stage.setTitle("New User List");
+        stage.setTitle("Task List");
+        stage.centerOnScreen();
 
         //stage.setFullScreen(true);
         // Display the Stage

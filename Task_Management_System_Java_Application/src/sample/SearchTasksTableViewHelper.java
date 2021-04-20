@@ -12,6 +12,7 @@ import javafx.util.Callback;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.Timestamp;
 
 public class SearchTasksTableViewHelper {
 
@@ -50,6 +51,50 @@ public class SearchTasksTableViewHelper {
         descriptionOfTaskCol.setCellValueFactory(descriptionOfTaskCellValueFactory);
         return descriptionOfTaskCol;
     }
+
+    public static TableColumn<Task, Void> addEditButtonToTable()
+    {
+        TableColumn<Task, Void> colBtn = new TableColumn<>("Edit Task");
+
+        Callback<TableColumn<Task, Void>, TableCell<Task, Void>> cellFactory = new Callback<>()
+        {
+            @Override
+            public TableCell<Task, Void> call(final TableColumn<Task, Void> param)
+            {
+                TableCell<Task, Void> cell = new TableCell<>() {
+
+                    final Button btn = new Button("Edit");
+                    {
+                        btn.setOnAction(new EventHandler<ActionEvent>(){
+                            public void handle(ActionEvent event) {
+                                TableView<Task> tableView = getTableView();
+                                Task task = tableView.getItems().get(getIndex());
+                                tableView.getItems().remove(task);
+                                editTask(task);
+                                System.out.println("Button clicked");
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+
+                return cell;
+            }
+        };
+
+        colBtn.setCellFactory(cellFactory);
+        return colBtn;
+    }
+
 
     public static TableColumn<Task, Void> addDeleteButtonToTable()
     {
@@ -92,6 +137,18 @@ public class SearchTasksTableViewHelper {
 
         colBtn.setCellFactory(cellFactory);
         return colBtn;
+    }
+
+    private static void editTask(Task task)
+    {
+        int taskID = task.getTask_ID();
+        int userID = task.getUser_ID();
+        String title = task.getTitle();
+        Timestamp startTime = task.getStart_date_time();
+        Timestamp endTime = task.getEnd_date_time();
+        String description = task.getDescription_of_task();
+        EditTask editTask = new EditTask(taskID, userID, title, startTime, endTime, description);
+        editTask.start(new Stage());
     }
 
     private static void deleteTask(Task task) {

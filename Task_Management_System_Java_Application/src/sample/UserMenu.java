@@ -113,6 +113,7 @@ public class UserMenu extends Application{
 
         //Adding scene to the stage
         stage.setScene(scene);
+        stage.centerOnScreen();
 
         //Displaying the contents of the stage
         stage.show();

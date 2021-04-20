@@ -360,7 +360,7 @@ public class YearAndMonthCalendarView extends Application {
         Scene scene = new Scene(gridPane);
 
         //Setting title to the Stage
-        stage.setTitle("Calendar and Month View");
+        stage.setTitle("Month and Year Calendar View");
 
         //Adding scene to the stage
         stage.setScene(scene);
