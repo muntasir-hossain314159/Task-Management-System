@@ -11,10 +11,11 @@ public class GetTaskList {
     public static ObservableList<Task> retrieveTaskList(int userID, String startDate, String startTime, String endDate, String endTime, String duration, String title, String description)
     {
         //todo description field does not work!!!
+        //todo make sure to change title so that user does not have to put in exact title
         String sql;
 
         if(!title.isEmpty() &&  startDate.isEmpty() && startTime.isEmpty() && endDate.isEmpty() && endTime.isEmpty() && duration.isEmpty() && description.isEmpty())
-            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Title = '" + title + "'";
+            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Title LIKE '%" + title + "%'";
 
         else if(title.isEmpty() &&  !startDate.isEmpty() && startTime.isEmpty() && endDate.isEmpty() && endTime.isEmpty() && duration.isEmpty() && description.isEmpty())
             sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND DATE(Start_date_time) = '" + startDate + "'";
@@ -35,10 +36,10 @@ public class GetTaskList {
             sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Description_of_task LIKE '%" + description + "%'";
 
         else if(!title.isEmpty() &&  !startDate.isEmpty() && startTime.isEmpty() && endDate.isEmpty() && endTime.isEmpty() && duration.isEmpty() && description.isEmpty())
-            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Title = '" + title + "' AND DATE(Start_date_time) = '" + startDate + "'";
+            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Title LIKE '%" + title + "%' AND DATE(Start_date_time) = '" + startDate + "'";
 
         else if(!title.isEmpty() &&  !startDate.isEmpty() && !startTime.isEmpty() && endDate.isEmpty() && endTime.isEmpty() && duration.isEmpty() && description.isEmpty())
-            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Title = '" + title + "' AND DATE(Start_date_time) = '" + startDate + "' AND TIME(Start_date_time) = '" + startTime + "'";
+            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Title LIKE '%" + title + "%' AND DATE(Start_date_time) = '" + startDate + "' AND TIME(Start_date_time) = '" + startTime + "'";
 
         else if(title.isEmpty() &&  !startDate.isEmpty() && !startTime.isEmpty() && endDate.isEmpty() && endTime.isEmpty() && duration.isEmpty() && description.isEmpty())
             sql = "SELECT * FROM task WHERE User_ID = '" + userID + "' AND DATE(Start_date_time) = '" + startDate + "' AND TIME(Start_date_time) = '" + startTime + "'";
@@ -50,7 +51,7 @@ public class GetTaskList {
             sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND DATE(Start_date_time) = '" + startDate + "' AND Duration = '" + duration + "'";
 
         else if(!title.isEmpty() &&  startDate.isEmpty() && startTime.isEmpty() && endDate.isEmpty() && endTime.isEmpty() && duration.isEmpty() && !description.isEmpty())
-            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Title = '" + title + "' AND Description_of_task LIKE '%" + description + "%'";
+            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Title LIKE '%" + title + "%' AND Description_of_task LIKE '%" + description + "%'";
 
         else
             sql = "SELECT * FROM task WHERE User_ID = " + userID;
