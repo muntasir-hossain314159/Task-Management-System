@@ -23,7 +23,7 @@ public class SearchFunctionInformation extends Application {
         Text text2 = new Text("3. Start Time (HH:MM)/(HH:MM:SS)");
         Text text3 = new Text("4. End Date (MM/DD/YYYY)");
         Text text4 = new Text("5. End Time (HH:MM)/(HH:MM:SS)");
-        Text text5 = new Text("6. Duration (Seconds)");
+        Text text5 = new Text("6. Duration (Minutes)");
         Text text6 = new Text("7. Description");
         Text text7 = new Text("8. Title and Start Date");
         Text text8 = new Text("9. Title, Start Date, and Start Time");

@@ -39,7 +39,7 @@ public class SearchTasksTableViewHelper {
     }
 
     public static TableColumn<Task, Integer> getDuration() {
-        TableColumn<Task, Integer> durationCol = new TableColumn<>("Duration (Seconds)");
+        TableColumn<Task, Integer> durationCol = new TableColumn<>("Duration (Minutes)");
         PropertyValueFactory<Task, Integer> durationCellValueFactory = new PropertyValueFactory<>("duration");
         durationCol.setCellValueFactory(durationCellValueFactory);
         return durationCol;

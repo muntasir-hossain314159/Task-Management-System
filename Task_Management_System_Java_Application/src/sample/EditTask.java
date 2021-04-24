@@ -186,7 +186,7 @@ public class EditTask extends Application {
     {
 
         String sql = "UPDATE task "
-                   + "SET Start_date_time = '" + startDateText + " " + startTime + "', End_date_time = '"  + endDateText + " " +  endTime + "', Duration = TIMESTAMPDIFF(SECOND, '" + startDateText + " " + startTime   + "', '" + endDateText + " " +  endTime + "'), Title = '" + title + "', Description_of_task = '" + description + "' WHERE Task_ID = " + taskID;
+                   + "SET Start_date_time = '" + startDateText + " " + startTime + "', End_date_time = '"  + endDateText + " " +  endTime + "', Duration = TIMESTAMPDIFF(MINUTE, '" + startDateText + " " + startTime   + "', '" + endDateText + " " +  endTime + "'), Title = '" + title + "', Description_of_task = '" + description + "' WHERE Task_ID = " + taskID;
         try
         {
             Connection connection = SetDatabaseConnection.getConnection();

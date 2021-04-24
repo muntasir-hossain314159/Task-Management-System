@@ -208,7 +208,7 @@ public class CreateNewTask extends Application {
 
 
         String sql = "INSERT INTO task (Task_ID, User_ID, Start_date_time, End_date_time, Duration, Title, Description_of_task)"
-                   + " VALUES (0, " + ID + ", '" + startDateText + " " + startTime + "', '" + endDateText + " " +  endTime + "', TIMESTAMPDIFF(SECOND, '" + startDateText + " " + startTime   + "', '" + endDateText + " " +  endTime + "'), '" + title + "', '"+ description + "');";
+                   + " VALUES (0, " + ID + ", '" + startDateText + " " + startTime + "', '" + endDateText + " " +  endTime + "', TIMESTAMPDIFF(MINUTE, '" + startDateText + " " + startTime   + "', '" + endDateText + " " +  endTime + "'), '" + title + "', '"+ description + "');";
 
         try
         {
