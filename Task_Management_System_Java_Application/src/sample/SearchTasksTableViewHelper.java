@@ -25,21 +25,21 @@ public class SearchTasksTableViewHelper {
     }
 
     public static TableColumn<Task, String> getStartTime() {
-        TableColumn<Task, String> startTimeCol = new TableColumn<>("Start Time");
+        TableColumn<Task, String> startTimeCol = new TableColumn<>("Start Time (YYYY-MM-DD HH:MM:SS)");
         PropertyValueFactory<Task, String> startTimeCellValueFactory = new PropertyValueFactory<>("start_date_time");
         startTimeCol.setCellValueFactory(startTimeCellValueFactory);
         return startTimeCol;
     }
 
     public static TableColumn<Task, String> getEndTime() {
-        TableColumn<Task, String> endTimeCol = new TableColumn<>("End Time");
+        TableColumn<Task, String> endTimeCol = new TableColumn<>("End Time (YYYY-MM-DD HH:MM:SS)");
         PropertyValueFactory<Task, String> endTimeCellValueFactory = new PropertyValueFactory<>("end_date_time");
         endTimeCol.setCellValueFactory(endTimeCellValueFactory);
         return endTimeCol;
     }
 
     public static TableColumn<Task, Integer> getDuration() {
-        TableColumn<Task, Integer> durationCol = new TableColumn<>("Duration");
+        TableColumn<Task, Integer> durationCol = new TableColumn<>("Duration (Seconds)");
         PropertyValueFactory<Task, Integer> durationCellValueFactory = new PropertyValueFactory<>("duration");
         durationCol.setCellValueFactory(durationCellValueFactory);
         return durationCol;
@@ -183,10 +183,10 @@ public class SearchTasksTableViewHelper {
         searchTasksTableViewScreen.start(stage);
     }
 
-    public static void returnToMenuPage(Stage stage, int userID)
+    public static void returnToSearchTasksPage(Stage stage, int userID)
     {
-        UserMenu userMenu = new UserMenu(userID);
-        userMenu.start(stage);
+        SearchTasks searchTasks = new SearchTasks(userID);
+        searchTasks.start(stage);
     }
 
 }

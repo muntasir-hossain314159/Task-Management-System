@@ -26,6 +26,9 @@ public class SearchTasksTableViewScreen extends Application {
     private String title;
     private String description;
 
+    private String weekFromStartDate;
+    private boolean check = false;
+
     public SearchTasksTableViewScreen(int userID, String startDate, String startTime, String endDate, String endTime, String duration, String title, String description) {
         this.userID = userID;
         this.startDate = startDate;
@@ -37,11 +40,23 @@ public class SearchTasksTableViewScreen extends Application {
         this.description = description;
     }
 
+    public SearchTasksTableViewScreen(int userID, String startDate, String weekFromStartDate, boolean check)
+    {
+        this.userID = userID;
+        this.startDate = startDate;
+        this.weekFromStartDate = weekFromStartDate;
+        this.check = check;
+    }
+
     public void start(Stage stage)
     {
         TableView<Task> tableView = new TableView<>();
 
-        ObservableList<Task> observableList = GetTaskList.retrieveTaskList(userID, startDate, startTime, endDate, endTime, duration, title, description);
+        ObservableList<Task> observableList;
+        if(!check)
+            observableList = GetTaskList.retrieveTaskList(userID, startDate, startTime, endDate, endTime, duration, title, description);
+        else
+            observableList = GetTaskList.retrieveTaskList(userID, startDate, weekFromStartDate);
 
         tableView.getItems().addAll(observableList);
 
@@ -55,14 +70,20 @@ public class SearchTasksTableViewScreen extends Application {
         Button refreshButton = new Button("Refresh");
         refreshButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                SearchTasksTableViewHelper.refreshPage(stage, userID, startDate, startTime, endDate, endTime, duration, title, description);
+                if(!check)
+                    SearchTasksTableViewHelper.refreshPage(stage, userID, startDate, startTime, endDate, endTime, duration, title, description);
+                else
+                    new SearchTasksTableViewScreen(userID, startDate, weekFromStartDate, true).start(stage);
             }
         });
 
-        Button returnToUserMenu = new Button("Return to Menu");
+        Button returnToUserMenu = new Button("Return");
         returnToUserMenu.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                SearchTasksTableViewHelper.returnToMenuPage(stage, userID);
+                if(!check)
+                    SearchTasksTableViewHelper.returnToSearchTasksPage(stage, userID);
+                else
+                    new UserMenu(userID).start(stage);
             }
         });
 
@@ -92,6 +113,7 @@ public class SearchTasksTableViewScreen extends Application {
                 "-fx-border-radius: 5;" +
                 "-fx-border-color: blue;");
 
+        tableView.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
         // Create the Scene
         Scene scene = new Scene(root);
         // Add the Scene to the Stage

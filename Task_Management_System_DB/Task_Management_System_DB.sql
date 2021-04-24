@@ -5,7 +5,7 @@ USE task_management_system_db;
 DROP TABLE IF EXISTS admin_account, new_user_account, approved_user_account, task; 
 
 CREATE TABLE admin_account (
-							Admin_ID		INT				NOT NULL	AUTO_INCREMENT,
+							Admin_ID		INT				NOT NULL,
                             Admin_username	VARCHAR(50)		NOT NULL	UNIQUE,
                             Admin_password	VARCHAR(50)		NOT NULL,
                             
@@ -43,11 +43,11 @@ CREATE TABLE task (
 							ON UPDATE CASCADE
 							ON DELETE CASCADE);
 -- --------------------------------------------------------------------------------------------------
-INSERT into admin_account VALUES (0, 'Anta', 'JAVA');
-INSERT into admin_account VALUES (0, 'Emily', 'JAVA');
-INSERT into admin_account VALUES (0, 'Jake', 'JAVA');
-INSERT into admin_account VALUES (0, 'Nate', 'JAVA');
-INSERT into admin_account VALUES (0, 'Muntasir', 'JAVA');
+INSERT into admin_account VALUES (1, 'Anta', 'JAVA');
+INSERT into admin_account VALUES (2, 'Emily', 'JAVA');
+INSERT into admin_account VALUES (3, 'Jake', 'JAVA');
+INSERT into admin_account VALUES (4, 'Nate', 'JAVA');
+INSERT into admin_account VALUES (5, 'Muntasir', 'JAVA');
 -- --------------------------------------------------------------------------------------------------
 SELECT * FROM admin_account;
 SELECT * FROM new_user_account;

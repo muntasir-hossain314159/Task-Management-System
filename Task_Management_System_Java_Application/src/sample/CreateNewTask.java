@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -38,6 +39,16 @@ public class CreateNewTask extends Application {
             }
         });
 
+        Button help = new Button("Help");
+        help.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                System.out.println("Help button pushed");
+                new CreateTaskInformation().start(new Stage());
+            }
+        });
+
+
+
         Text text0 = new Text("Create New Task");
 
         TextField title = new TextField();
@@ -48,13 +59,13 @@ public class CreateNewTask extends Application {
         startDate.setEditable(true);
         startDate.setShowWeekNumbers(true);
         TextField startTime = new TextField();
-        Text startTimeName = new Text("Start Time");
+        Text startTimeName = new Text("Start Date & Time");
 
         DatePicker endDate = new DatePicker(LocalDate.now());
         endDate.setEditable(true);
         endDate.setShowWeekNumbers(true);
         TextField endTime = new TextField();
-        Text endTimeName = new Text("End Time");
+        Text endTimeName = new Text("End Date & Time");
 
         TextField description = new TextField();
         Text descriptionName = new Text("Description");
@@ -66,27 +77,35 @@ public class CreateNewTask extends Application {
                 String titleText = title.getText();
 
                 LocalDate startDateTime = startDate.getValue();
-                String startDateText = startDateTime.toString();
-                //String startDateText = startDateTime.format(DateTimeFormatter.ofPattern("yyyy|MM|dd"));
+                String startDateText = "";
+                if(startDateTime != null)
+                    startDateText= startDateTime.toString();
+                //startDateText = startDateTime.format(DateTimeFormatter.ofPattern("yyyy?MM?dd"));
                 String startTimeText = startTime.getText();
                 System.out.println(startDateText);
 
                 LocalDate endDateTime = endDate.getValue();
-                String endDateText = endDateTime.toString();
+                String endDateText = "";
+                if(endDateTime != null)
+                    endDateText = endDateTime.toString();
                 //String endDateText = endDateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
                 String endTimeText = endTime.getText();
                 System.out.println(endDateText);
 
                 String descriptionText = description.getText();
-                addTask(ID, titleText, startDateText, startTimeText, endDateText, endTimeText, descriptionText);
 
+                boolean check = checkForConflict(ID, startDateText, startTimeText, endDateText, endTimeText);
+                if(check)
+                    addTask(ID, titleText, startDateText, startTimeText, endDateText, endTimeText, descriptionText);
+
+                //System.out.println("This");
                 title.setText("");
                 startDate.setValue(LocalDate.now());
                 startTime.setText("");
                 endDate.setValue(LocalDate.now());
                 endTime.setText("");
                 description.setText("");
-                System.out.println("Task added successfully");
+                //System.out.println("Task added successfully");
             }
         });
 
@@ -128,8 +147,11 @@ public class CreateNewTask extends Application {
         GridPane.setHalignment(menu, HPos.CENTER);
 
         addButton.setMaxHeight(Double.MAX_VALUE);
-        gridPane.add(addButton, 0, 6, 3, 1);
+        gridPane.add(addButton, 1, 6, 1, 1);
         GridPane.setHalignment(addButton, HPos.CENTER);
+
+        gridPane.add(help, 2, 6, 1, 1);
+        GridPane.setHalignment(help, HPos.CENTER);
 
         //GridPane.setHalignment(popupContent, HPos.CENTER);
 
@@ -149,27 +171,68 @@ public class CreateNewTask extends Application {
         primaryStage.show();
     }
 
+    private boolean checkForConflict(int ID, String startDateText, String startTime, String endDateText, String endTime)
+    {
+        boolean check = true;
+
+        String sql1 = "SELECT * FROM task WHERE Start_date_time <= '" + startDateText + startTime + "' AND End_date_time >= '" + startDateText + startTime + "' AND User_ID = " + ID;
+        String sql2 = "SELECT * FROM task WHERE Start_date_time <= '" + endDateText + endTime + "' AND End_date_time >= '" + endDateText + endTime + "' AND User_ID = " + ID;
+
+        try {
+            Connection connection = SetDatabaseConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql1);
+            ResultSet resultSet1 = preparedStatement.executeQuery();
+
+
+            PreparedStatement preparedStatement1 = connection.prepareStatement(sql2);
+            ResultSet resultSet2 = preparedStatement1.executeQuery();
+
+            if(resultSet1.next() || resultSet2.next()) {
+
+                ConflictErrorScreen conflictErrorScreen = new ConflictErrorScreen();
+                conflictErrorScreen.start(new Stage());
+                check = conflictErrorScreen.setCheck();
+            }
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Big error");
+        }
+
+        return check;
+    }
     private void addTask(int ID, String title, String startDateText, String startTime, String endDateText, String endTime, String description)
     {
         //todo add date button, add a datepicker field if possible
-       String sql = "INSERT INTO task (Task_ID, User_ID, Start_date_time, End_date_time, Duration, Title, Description_of_task)"
+
+
+        String sql = "INSERT INTO task (Task_ID, User_ID, Start_date_time, End_date_time, Duration, Title, Description_of_task)"
                    + " VALUES (0, " + ID + ", '" + startDateText + " " + startTime + "', '" + endDateText + " " +  endTime + "', TIMESTAMPDIFF(SECOND, '" + startDateText + " " + startTime   + "', '" + endDateText + " " +  endTime + "'), '" + title + "', '"+ description + "');";
+
         try
         {
             Connection connection = SetDatabaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
+            new WindowTaskScreen().start(new Stage(), true);
 
 
         }
         catch (Exception e)
         {
             System.out.println(e);
+            new WindowTaskScreen().start(new Stage(), false);
         }
 
 
     }
 
 
-    
+
+
 }
+
+
+    
+

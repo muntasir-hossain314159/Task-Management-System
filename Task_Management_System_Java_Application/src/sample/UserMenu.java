@@ -12,6 +12,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+
+import static java.util.Calendar.DATE;
+
 public class UserMenu extends Application{
 
     private int ID;
@@ -33,6 +37,17 @@ public class UserMenu extends Application{
             }
         });
 
+        Button tasksForWeek  = new Button("Tasks for this Week");
+        tasksForWeek.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                System.out.println("Tasks for this week button pushed");
+                new SearchTasksTableViewScreen(ID, LocalDate.now().toString(), LocalDate.now().plusDays(6).toString(), true).start(stage);
+                System.out.println(LocalDate.now().toString());
+                System.out.println(LocalDate.now().plusDays(6).toString());
+            }
+        });
+
+
         Button searchForTasks = new Button("Search for Tasks");
         searchForTasks.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -52,6 +67,14 @@ public class UserMenu extends Application{
             }
         });
 
+        Button deleteUserAccount = new Button("Delete User Account");
+        deleteUserAccount.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                System.out.println("Delete user account button pushed");
+                new DeleteUserAccount(ID).start(stage);
+            }
+        });
+
         Button logOut = new Button("Log Out");
         logOut.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -61,10 +84,22 @@ public class UserMenu extends Application{
             }
         });
 
+        Button exit = new Button("Exit");
+        exit.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                System.out.println("Exit button pushed");
+                Exit exit = new Exit(ID);
+                exit.start(stage);
+            }
+        });
+
         calendar.setMaxWidth(Double.MAX_VALUE);
         createNewTask.setMaxWidth(Double.MAX_VALUE);
         searchForTasks.setMaxWidth(Double.MAX_VALUE);
+        tasksForWeek.setMaxWidth(Double.MAX_VALUE);
         logOut.setMaxWidth(Double.MAX_VALUE);
+        deleteUserAccount.setMaxWidth(Double.MAX_VALUE);
+        exit.setMaxWidth(Double.MAX_VALUE);
 
         //Creating a Grid Pane
         GridPane gridPane = new GridPane();
@@ -86,21 +121,24 @@ public class UserMenu extends Application{
         //Arranging all the nodes in the grid
         gridPane.add(text0, 0, 0, 1, 1);
         GridPane.setHalignment(text0, HPos.CENTER);
+
         gridPane.add(calendar, 0, 1, 1, 1);
-        GridPane.setHalignment(calendar, HPos.CENTER);
-        gridPane.add(createNewTask, 0, 2, 1, 1);
-        GridPane.setHalignment(createNewTask, HPos.CENTER);
-        gridPane.add(searchForTasks, 0, 3, 1, 1);
-        GridPane.setHalignment(logOut, HPos.CENTER);
-        gridPane.add(logOut, 0, 4, 1, 1);
-        GridPane.setHalignment(logOut, HPos.CENTER);
+        gridPane.add(tasksForWeek, 0, 2, 1, 1);
+        gridPane.add(createNewTask, 0, 3, 1, 1);
+        gridPane.add(searchForTasks, 0, 4, 1, 1);
+        gridPane.add(deleteUserAccount, 0, 5, 1, 1);
+        gridPane.add(logOut, 0, 6, 1, 1);
+        gridPane.add(exit, 0, 7, 1, 1);
 
 
 
         //Styling nodes
         calendar.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+        tasksForWeek.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         createNewTask.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         searchForTasks.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+        deleteUserAccount.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+        exit.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         logOut.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         text0.setStyle("-fx-font: normal bold 20px 'serif' ");
         gridPane.setStyle("-fx-background-color: BEIGE;");

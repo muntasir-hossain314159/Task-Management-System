@@ -22,6 +22,7 @@ import java.sql.Statement;
 public class AdminLogin extends Application{
 
     public void start(Stage stage) {
+
         Text text0= new Text("Admin LogIn");
         Text text1 = new Text("Username");
         Text text2 = new Text("Password");

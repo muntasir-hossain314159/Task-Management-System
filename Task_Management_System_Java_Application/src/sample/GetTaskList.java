@@ -15,46 +15,68 @@ public class GetTaskList {
         String sql;
 
         if(!title.isEmpty() &&  startDate.isEmpty() && startTime.isEmpty() && endDate.isEmpty() && endTime.isEmpty() && duration.isEmpty() && description.isEmpty())
-            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Title LIKE '%" + title + "%'";
+            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Title LIKE '%" + title + "%' ORDER BY Start_date_time DESC";
 
         else if(title.isEmpty() &&  !startDate.isEmpty() && startTime.isEmpty() && endDate.isEmpty() && endTime.isEmpty() && duration.isEmpty() && description.isEmpty())
-            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND DATE(Start_date_time) = '" + startDate + "'";
+            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND DATE(Start_date_time) = '" + startDate + "' ORDER BY Start_date_time DESC";
 
         else if(title.isEmpty() &&  startDate.isEmpty() && !startTime.isEmpty() && endDate.isEmpty() && endTime.isEmpty() && duration.isEmpty() && description.isEmpty())
-            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND TIME(Start_date_time) = '" + startTime + "'";
+            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND TIME(Start_date_time) = '" + startTime + "' ORDER BY Start_date_time DESC";
 
         else if(title.isEmpty() &&  startDate.isEmpty() && startTime.isEmpty() && !endDate.isEmpty() && endTime.isEmpty() && duration.isEmpty() && description.isEmpty())
-            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND DATE(End_date_time) = '" + endDate + "'";
+            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND DATE(End_date_time) = '" + endDate + "' ORDER BY Start_date_time DESC";
 
         else if(title.isEmpty() &&  startDate.isEmpty() && startTime.isEmpty() && endDate.isEmpty() && !endTime.isEmpty() && duration.isEmpty() && description.isEmpty())
-            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND DATE(End_date_time) = '" + endTime + "'";
+            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND DATE(End_date_time) = '" + endTime + "' ORDER BY Start_date_time DESC";
 
         else if(title.isEmpty() &&  startDate.isEmpty() && startTime.isEmpty() && endDate.isEmpty() && endTime.isEmpty() && !duration.isEmpty() && description.isEmpty())
-            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Duration = '" + duration + "'";
+            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Duration = '" + duration + "' ORDER BY Start_date_time DESC";
 
         else if(title.isEmpty() &&  startDate.isEmpty() && startTime.isEmpty() && endDate.isEmpty() && endTime.isEmpty() && duration.isEmpty() && !description.isEmpty())
-            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Description_of_task LIKE '%" + description + "%'";
+            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Description_of_task LIKE '%" + description + "%' ORDER BY Start_date_time DESC";
 
         else if(!title.isEmpty() &&  !startDate.isEmpty() && startTime.isEmpty() && endDate.isEmpty() && endTime.isEmpty() && duration.isEmpty() && description.isEmpty())
-            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Title LIKE '%" + title + "%' AND DATE(Start_date_time) = '" + startDate + "'";
+            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Title LIKE '%" + title + "%' AND DATE(Start_date_time) = '" + startDate + "' ORDER BY Start_date_time DESC";
 
         else if(!title.isEmpty() &&  !startDate.isEmpty() && !startTime.isEmpty() && endDate.isEmpty() && endTime.isEmpty() && duration.isEmpty() && description.isEmpty())
-            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Title LIKE '%" + title + "%' AND DATE(Start_date_time) = '" + startDate + "' AND TIME(Start_date_time) = '" + startTime + "'";
+            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Title LIKE '%" + title + "%' AND DATE(Start_date_time) = '" + startDate + "' AND TIME(Start_date_time) = '" + startTime + "' ORDER BY Start_date_time DESC";
 
         else if(title.isEmpty() &&  !startDate.isEmpty() && !startTime.isEmpty() && endDate.isEmpty() && endTime.isEmpty() && duration.isEmpty() && description.isEmpty())
-            sql = "SELECT * FROM task WHERE User_ID = '" + userID + "' AND DATE(Start_date_time) = '" + startDate + "' AND TIME(Start_date_time) = '" + startTime + "'";
+            sql = "SELECT * FROM task WHERE User_ID = '" + userID + "' AND DATE(Start_date_time) = '" + startDate + "' AND TIME(Start_date_time) = '" + startTime + "' ORDER BY Start_date_time DESC";
 
         else if(title.isEmpty() &&  !startDate.isEmpty() && !startTime.isEmpty() && !endDate.isEmpty() && !endTime.isEmpty() && duration.isEmpty() && description.isEmpty())
-            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND DATE(Start_date_time) = '" + startDate + "' AND TIME(Start_date_time) = '" + startTime + "' AND DATE(End_date_time) = '" + endDate + "' AND TIME(End_date_time) = '" + endTime + "'";
+            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND DATE(Start_date_time) = '" + startDate + "' AND TIME(Start_date_time) = '" + startTime + "' AND DATE(End_date_time) = '" + endDate + "' AND TIME(End_date_time) = '" + endTime + "' ORDER BY Start_date_time DESC";
 
         else if(title.isEmpty() &&  !startDate.isEmpty() && startTime.isEmpty() && endDate.isEmpty() && endTime.isEmpty() && !duration.isEmpty() && description.isEmpty())
-            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND DATE(Start_date_time) = '" + startDate + "' AND Duration = '" + duration + "'";
+            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND DATE(Start_date_time) = '" + startDate + "' AND Duration = '" + duration + "' ORDER BY Start_date_time DESC";
 
         else if(!title.isEmpty() &&  startDate.isEmpty() && startTime.isEmpty() && endDate.isEmpty() && endTime.isEmpty() && duration.isEmpty() && !description.isEmpty())
-            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Title LIKE '%" + title + "%' AND Description_of_task LIKE '%" + description + "%'";
+            sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND Title LIKE '%" + title + "%' AND Description_of_task LIKE '%" + description + "%' ORDER BY Start_date_time DESC";
 
         else
-            sql = "SELECT * FROM task WHERE User_ID = " + userID;
+            sql = "SELECT * FROM task WHERE User_ID = " + userID + " ORDER BY Start_date_time DESC";
+
+        try
+        {
+
+            Connection connection = SetDatabaseConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            ObservableList<Task> dbData = FXCollections.observableArrayList(dataBaseArrayList(resultSet));
+            return dbData;
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        return null;
+
+    }
+
+    public static ObservableList<Task> retrieveTaskList(int userID, String startDate, String weekFromStartDate)
+    {
+        //todo make sure to change title so that user does not have to put in exact title
+        String sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND DATE(Start_date_time) >= '" + startDate + "' AND DATE(Start_date_time) <= '" + weekFromStartDate + "' ORDER BY Start_date_time";
 
         try
         {

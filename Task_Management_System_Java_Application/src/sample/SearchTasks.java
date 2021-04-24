@@ -42,14 +42,14 @@ public class SearchTasks extends Application {
         startDate.setEditable(true);
         startDate.setShowWeekNumbers(true);
         TextField startTime = new TextField();
-        Text startTimeName = new Text("Start Time");
+        Text startTimeName = new Text("Start Date & Time");
 
         DatePicker endDate = new DatePicker();
         endDate.setValue(null);
         endDate.setEditable(true);
         endDate.setShowWeekNumbers(true);
         TextField endTime = new TextField();
-        Text endTimeName = new Text("End Time");
+        Text endTimeName = new Text("End Date & Time");
 
         TextField description = new TextField();
         Text descriptionName = new Text("Description");
@@ -63,6 +63,14 @@ public class SearchTasks extends Application {
                 System.out.println("Return button pushed");
                 UserMenu userMenu = new UserMenu(userID);
                 userMenu.start(stage);
+            }
+        });
+
+        Button searchFunctions = new Button("Help");
+        searchFunctions.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                System.out.println("Help button pushed");
+                new SearchFunctionInformation().start(new Stage());
             }
         });
 
@@ -146,8 +154,11 @@ public class SearchTasks extends Application {
         GridPane.setHalignment(menu, HPos.CENTER);
 
         search.setMaxHeight(Double.MAX_VALUE);
-        gridPane.add(search, 0, 7, 3, 1);
+        gridPane.add(search, 1, 7, 1, 1);
         GridPane.setHalignment(search, HPos.CENTER);
+
+        gridPane.add(searchFunctions, 2, 7, 1, 1);
+        GridPane.setHalignment(searchFunctions, HPos.CENTER);
 
         //GridPane.setHalignment(popupContent, HPos.CENTER);
 
@@ -162,6 +173,7 @@ public class SearchTasks extends Application {
 
         //Adding scene to the stage
         stage.setScene(scene);
+        stage.centerOnScreen();
 
         //Displaying the contents of the stage
         stage.show();

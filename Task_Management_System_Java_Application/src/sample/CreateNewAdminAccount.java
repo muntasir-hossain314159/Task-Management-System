@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class CreateNewAdminAccount extends Application {
 
@@ -49,7 +50,17 @@ public class CreateNewAdminAccount extends Application {
                     try
                     {
                         Connection connection = SetDatabaseConnection.getConnection();
-                        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO admin_account VALUES (0, '" + Admin_username + "', '" + Admin_password + "')");
+
+                        String sql1 = "SELECT COUNT(Admin_ID) AS Admin_Count FROM admin_account";
+                        PreparedStatement preparedStatement1 = connection.prepareStatement(sql1);
+                        ResultSet resultSet = preparedStatement1.executeQuery();
+
+                        resultSet.next();
+                        int adminCount = resultSet.getInt("Admin_Count");
+                        System.out.println(adminCount);
+                        adminCount++;
+
+                        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO admin_account VALUES (" + adminCount + ", '" + Admin_username + "', '" + Admin_password + "')");
                         preparedStatement.executeUpdate();
                     }
                     catch (Exception e)

@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Random;
 
 public class CreateNewUserAccount extends Application {
 
@@ -43,14 +44,27 @@ public class CreateNewUserAccount extends Application {
                     try
                     {
                         Connection connection = SetDatabaseConnection.getConnection();
+
                         String sql = "SELECT Approved_username AS username FROM approved_user_account WHERE Approved_username LIKE BINARY '" + Username + "';";
+                        String sql1 = "SELECT COUNT(Admin_ID) AS Admin_Count FROM admin_account";
                         PreparedStatement preparedStatement1 = connection.prepareStatement(sql);
+                        PreparedStatement preparedStatement2 = connection.prepareStatement(sql1);
                         ResultSet resultSet = preparedStatement1.executeQuery();
+                        ResultSet resultSet1 = preparedStatement2.executeQuery();
+
+                        resultSet1.next();
+                        int adminCount = resultSet1.getInt("Admin_Count");
+                        System.out.println(adminCount);
+
 
                         if(!resultSet.next())
                         {
-                            PreparedStatement preparedStatement2 = connection.prepareStatement("INSERT INTO new_user_account VALUES (0, '" + Username + "', '" + User_password + "', " + "1)");
-                            preparedStatement2.executeUpdate();
+                            Random rand = new Random();
+                            int randomNum = rand.nextInt(adminCount) + 1;
+                            System.out.println(randomNum);
+
+                            PreparedStatement preparedStatement3 = connection.prepareStatement("INSERT INTO new_user_account VALUES (0, '" + Username + "', '" + User_password + "', " + randomNum + ")");
+                            preparedStatement3.executeUpdate();
                             UserLogin userLogin = new UserLogin();
                             userLogin.start(stage);
                         }
