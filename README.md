@@ -10,7 +10,7 @@
 
 ## Role of Team Members:
 
-Each team member contributed equally towards the following roles: Programmer, Researcher, UX/UI Designer, Report Writer, Create Task Page, Search for Tasks Page, and Calendar Page
+Each team member contributed equally towards the following roles: Programmer, Researcher, UX/UI Designer, Report Writer, Create Task Page, Search for Tasks Page, and Calendar Page
 
 ### Specific Contributions to the Application:
 
