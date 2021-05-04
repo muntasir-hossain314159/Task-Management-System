@@ -9,13 +9,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 
+//SearchTasksTableViewHelper class is used to create TableColumns that are added to the TableView
 public class SearchTasksTableViewHelper {
 
+    //Title Column
     public static TableColumn<Task, String> getTitleColumn()
     {
         TableColumn<Task, String> title = new TableColumn<>("Title");
@@ -24,6 +25,7 @@ public class SearchTasksTableViewHelper {
         return title;
     }
 
+    //Start Date and Time Column
     public static TableColumn<Task, String> getStartTime() {
         TableColumn<Task, String> startTimeCol = new TableColumn<>("Start Time (YYYY-MM-DD HH:MM:SS)");
         PropertyValueFactory<Task, String> startTimeCellValueFactory = new PropertyValueFactory<>("start_date_time");
@@ -31,6 +33,7 @@ public class SearchTasksTableViewHelper {
         return startTimeCol;
     }
 
+    //End Date and Time Column
     public static TableColumn<Task, String> getEndTime() {
         TableColumn<Task, String> endTimeCol = new TableColumn<>("End Time (YYYY-MM-DD HH:MM:SS)");
         PropertyValueFactory<Task, String> endTimeCellValueFactory = new PropertyValueFactory<>("end_date_time");
@@ -38,6 +41,7 @@ public class SearchTasksTableViewHelper {
         return endTimeCol;
     }
 
+    //Duration Column
     public static TableColumn<Task, Integer> getDuration() {
         TableColumn<Task, Integer> durationCol = new TableColumn<>("Duration (Minutes)");
         PropertyValueFactory<Task, Integer> durationCellValueFactory = new PropertyValueFactory<>("duration");
@@ -45,6 +49,7 @@ public class SearchTasksTableViewHelper {
         return durationCol;
     }
 
+    //Description Column
     public static TableColumn<Task, String> getDescriptionOfTask() {
         TableColumn<Task, String> descriptionOfTaskCol = new TableColumn<>("Description of Task");
         PropertyValueFactory<Task, String> descriptionOfTaskCellValueFactory = new PropertyValueFactory<>("description_of_task");
@@ -52,6 +57,7 @@ public class SearchTasksTableViewHelper {
         return descriptionOfTaskCol;
     }
 
+    //Edit Button column (adds an edit button to each row of data)
     public static TableColumn<Task, Void> addEditButtonToTable()
     {
         TableColumn<Task, Void> colBtn = new TableColumn<>("Edit Task");
@@ -71,7 +77,7 @@ public class SearchTasksTableViewHelper {
                                 Task task = tableView.getItems().get(getIndex());
                                 tableView.getItems().remove(task);
                                 editTask(task);
-                                System.out.println("Button clicked");
+                                System.out.println("Edit button clicked");
                             }
                         });
                     }
@@ -95,7 +101,7 @@ public class SearchTasksTableViewHelper {
         return colBtn;
     }
 
-
+    //Delete Button column (adds a delete button to each row of data)
     public static TableColumn<Task, Void> addDeleteButtonToTable()
     {
         TableColumn<Task, Void> colBtn = new TableColumn<>("Delete Task");
@@ -139,6 +145,7 @@ public class SearchTasksTableViewHelper {
         return colBtn;
     }
 
+    //Edits task by passing the current value of that task to the EditTask class
     private static void editTask(Task task)
     {
         int taskID = task.getTask_ID();
@@ -147,28 +154,26 @@ public class SearchTasksTableViewHelper {
         Timestamp startTime = task.getStart_date_time();
         Timestamp endTime = task.getEnd_date_time();
         String description = task.getDescription_of_task();
+
         EditTask editTask = new EditTask(taskID, userID, title, startTime, endTime, description);
         editTask.start(new Stage());
     }
 
+    //Deletes a task by removing all the corresponding data of task from the task table
     private static void deleteTask(Task task) {
         int taskID = task.getTask_ID();
+
+        //Prints the title of the task being deleted
         String title = task.getTitle();
         System.out.println(title);
 
         try
         {
-            //String sql1 = "SET FOREIGN_KEY_CHECKS = 0;";
-            String sql2 = "DELETE FROM task WHERE Task_ID LIKE BINARY " + taskID + ";";
-            //String sql3 = "SET FOREIGN_KEY_CHECKS = 1;";
             Connection connection = SetDatabaseConnection.getConnection();
-            //PreparedStatement preparedStatement1 = connection.prepareStatement(sql1);
-            PreparedStatement preparedStatement2 = connection.prepareStatement(sql2);
-            //PreparedStatement preparedStatement3 = connection.prepareStatement(sql3);
 
-            //preparedStatement1.executeUpdate();
-            preparedStatement2.executeUpdate();
-            //preparedStatement3.executeUpdate();
+            String sql = "DELETE FROM task WHERE Task_ID LIKE BINARY " + taskID + ";";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.executeUpdate();
         }
         catch (Exception e)
         {
@@ -176,6 +181,7 @@ public class SearchTasksTableViewHelper {
         }
     }
 
+    //Refreshes page by reloading the SearchTasksTableViewScreen
     public static void refreshPage(Stage stage, int userID, String startDate, String startTime, String endDate, String endTime, String duration, String title, String description)
     {
         System.out.println("Page has been refreshed");
@@ -183,6 +189,7 @@ public class SearchTasksTableViewHelper {
         searchTasksTableViewScreen.start(stage);
     }
 
+    //Returns to Search Task page
     public static void returnToSearchTasksPage(Stage stage, int userID)
     {
         SearchTasks searchTasks = new SearchTasks(userID);

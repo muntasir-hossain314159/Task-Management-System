@@ -1,8 +1,8 @@
 package sample;
 
-
 import java.sql.Timestamp;
 
+//Task class stores the data from a ResultSet in GetTaskList class
 public class Task {
 
     private int task_ID;
@@ -13,6 +13,7 @@ public class Task {
     private String title;
     private String description_of_task;
 
+    //Constructor
     public Task(int task_ID, int user_ID, Timestamp start_date_time, Timestamp end_date_time, int duration, String title, String description_of_task) {
         this.task_ID = task_ID;
         this.user_ID = user_ID;

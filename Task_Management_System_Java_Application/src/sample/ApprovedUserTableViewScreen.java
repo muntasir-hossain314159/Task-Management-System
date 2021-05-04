@@ -13,9 +13,12 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+//ApprovedUserTableViewScreen class displays a table of Approved Users
 public class ApprovedUserTableViewScreen extends Application {
 
     private int adminID;
+
+    //Constructor
     public ApprovedUserTableViewScreen(int ID)
     {
         this.adminID = ID;
@@ -25,14 +28,19 @@ public class ApprovedUserTableViewScreen extends Application {
     {
         TableView<ApprovedUser> tableView = new TableView<>();
 
+        //Initializes the ObservableList for approved users
         ObservableList<ApprovedUser> approvedUserObservableList = GetApprovedUserList.retrieveApprovedUserList();
-        // Add rows to the TableView
+
+        //Add rows to the TableView
         tableView.getItems().addAll(approvedUserObservableList);
-        // Add columns to the TableView
+
+        //Add columns to the TableView
         tableView.getColumns().addAll(ApprovedUserTableViewHelper.getUsernameColumn(), ApprovedUserTableViewHelper.getPasswordColumn(), ApprovedUserTableViewHelper.addDeleteButtonToTable());
 
+        //Set the column resize policy to constrained resize policy
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-
+        //Refresh Button
         Button refreshButton = new Button("Refresh");
         refreshButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -40,6 +48,7 @@ public class ApprovedUserTableViewScreen extends Application {
             }
         });
 
+        //Return to Menu Button
         Button returnToAdminMenu = new Button("Return to Menu");
         returnToAdminMenu.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -47,6 +56,7 @@ public class ApprovedUserTableViewScreen extends Application {
             }
         });
 
+        //Set HBox and align Nodes
         HBox leftBox = new HBox(refreshButton);
         leftBox.setAlignment(Pos.TOP_LEFT);
 
@@ -58,20 +68,14 @@ public class ApprovedUserTableViewScreen extends Application {
         HBox.setHgrow(leftBox, Priority.ALWAYS);
         HBox.setHgrow(rightBox, Priority.ALWAYS);
 
-        ///*
-        //Set the column resize policy to constrained resize policy
-        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        // Set the Placeholder for an empty table
-        //tableView.setPlaceholder(new Label("No visible columns and/or data exist."));
-        //*/
-
-        // Create the VBox
+        //Create the VBox
         VBox root = new VBox();
-        // Add the Table to the VBox
-        root.getChildren().addAll(tableView, hbox);
         root.setPrefWidth(600);
-        //root.setAlignment(Pos.CENTER);
-        // Set the Padding and Border for the VBox
+
+        //Add the Table to the VBox
+        root.getChildren().addAll(tableView, hbox);
+
+        //Set the Padding and Border for the VBox
         root.setStyle("-fx-padding: 10;" +
                 "-fx-border-style: solid inside;" +
                 "-fx-border-width: 2;" +
@@ -79,15 +83,16 @@ public class ApprovedUserTableViewScreen extends Application {
                 "-fx-border-radius: 5;" +
                 "-fx-border-color: blue;");
 
-        // Create the Scene
+        //Create the Scene
         Scene scene = new Scene(root);
-        // Add the Scene to the Stage
+
+        //Add the Scene to the Stage
         stage.setScene(scene);
-        // Set the Title of the Stage
+
+        //Set the Title of the Stage
         stage.setTitle("Approved User List");
 
-        //stage.setFullScreen(true);
-        // Display the Stage
+        //Display the Stage
         stage.show();
     }
 

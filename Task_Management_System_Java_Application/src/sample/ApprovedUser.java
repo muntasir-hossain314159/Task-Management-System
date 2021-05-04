@@ -1,13 +1,16 @@
 package sample;
 
+//ApprovedUser class stores the data from a ResultSet in GetApprovedUserList class
 public class ApprovedUser {
 
     private int ID;
     private String username = null;
     private String password = null;
 
+    //Constructor
     public ApprovedUser() {}
 
+    //Constructor
     public ApprovedUser(int ID, String username, String password) {
         this.ID = ID;
         this.username = username;

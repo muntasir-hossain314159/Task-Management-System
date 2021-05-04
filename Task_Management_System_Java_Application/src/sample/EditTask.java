@@ -13,11 +13,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.sql.*;
 import java.time.LocalDate;
 
-
+//EditTask class is used to edit a pre-existing task
 public class EditTask extends Application {
 
     private int taskID;
@@ -31,7 +30,7 @@ public class EditTask extends Application {
     private String endTimeText;
     private String descriptionText;
 
-
+    //Constructor
     public EditTask(int taskID, int userID, String titleText, Timestamp startTime, Timestamp endTime, String descriptionText) {
         this.taskID = taskID;
         this.userID = userID;
@@ -43,39 +42,50 @@ public class EditTask extends Application {
 
     public void start(Stage primaryStage)
     {
+        //Convert startTime (TimeStamp) to startDateText and startTimeText (String)
         startDateText = startTime.toString().split(" ")[0];
         System.out.println("Start Date: " + startDateText);
-        endDateText = endTime.toString().split(" ")[0];
-        System.out.println("End date: " + endDateText);
-
         startTimeText = startTime.toString().split(" ")[1];
         System.out.println("Start Time: " + startTimeText);
+
+        //Convert endTime (TimeStamp) to endDateText and endTimeText (String)
+        endDateText = endTime.toString().split(" ")[0];
+        System.out.println("End date: " + endDateText);
         endTimeText = endTime.toString().split(" ")[1];
         System.out.println("End Time: " + endTimeText);
 
+        //Header
         Text text0 = new Text("Edit Task");
 
-        TextField title = new TextField();
+        //Title
         Text titleName = new Text("Title");
+        TextField title = new TextField();
 
+        //Start Date DatePicker
         DatePicker startDate = new DatePicker();
         startDate.setValue(null);
         startDate.setEditable(true);
         startDate.setShowWeekNumbers(true);
-        TextField startTime = new TextField();
-        Text startTimeName = new Text("Start Time");
 
+        //Start Time
+        Text startTimeName = new Text("Start Time");
+        TextField startTime = new TextField();
+
+        //End Date DatePicker
         DatePicker endDate = new DatePicker();
         endDate.setValue(null);
         endDate.setEditable(true);
         endDate.setShowWeekNumbers(true);
-        TextField endTime = new TextField();
+
+        //End Time
         Text endTimeName = new Text("End Time");
+        TextField endTime = new TextField();
 
-        TextField description = new TextField();
+        //Description
         Text descriptionName = new Text("Description");
+        TextField description = new TextField();
 
-
+        //Cancel button
         Button cancel = new Button("Cancel");
         cancel.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -84,48 +94,55 @@ public class EditTask extends Application {
             }
         });
 
-        Button search = new Button("Submit");
-        search.setOnAction(new EventHandler<ActionEvent>() {
+        //Submit button
+        Button submit = new Button("Submit");
+        submit.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 System.out.println("Submit button pushed");
 
+                //Title
                 if(!title.getText().isEmpty())
                     titleText = title.getText();
 
+                //Start Date
                 LocalDate startDateTime = startDate.getValue();
                 if (startDateTime != null)
                     startDateText = startDateTime.toString();
 
+                //Start Time
                 if(!startTime.getText().isEmpty())
                     startTimeText = startTime.getText();
 
+                //End Date
                 LocalDate endDateTime = endDate.getValue();
                 if (endDateTime != null)
                     endDateText = endDateTime.toString();
 
+                //End Time
                 if(!endTime.getText().isEmpty())
                     endTimeText = endTime.getText();
 
+                //Description
                 if(!description.getText().isEmpty())
                     descriptionText = description.getText();
 
-                //todo how do I take the duration from user?? do i take hours or mins or seconds
                 editTask(primaryStage, taskID, userID, startDateText, startTimeText, endDateText, endTimeText, titleText, descriptionText);
 
+                //Set fields to initial value
                 title.setText("");
                 startDate.setValue(null);
                 startTime.setText("");
                 endDate.setValue(null);
                 endTime.setText("");
                 description.setText("");
-                //System.out.println("Search done successfully");
             }
         });
 
+        //Creating GridPane
         GridPane gridPane = new GridPane();
+
         //Setting size for the pane
         gridPane.setMinSize(400, 400);
-        //gridPane.setGridLinesVisible(true);
 
         //Setting the padding
         gridPane.setPadding(new Insets(10, 10, 10, 10));
@@ -152,20 +169,17 @@ public class EditTask extends Application {
         gridPane.add(endDate, 1, 4,1, 1);
         gridPane.add(endTime, 2, 4, 1, 1);
 
-
         gridPane.add(descriptionName, 0, 5, 1, 1);
         gridPane.add(description, 1, 5, 1, 1);
 
-        //menu.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         gridPane.add(cancel, 0, 6, 1, 1);
         GridPane.setHalignment(cancel, HPos.CENTER);
 
-        search.setMaxHeight(Double.MAX_VALUE);
-        gridPane.add(search, 0, 6, 3, 1);
-        GridPane.setHalignment(search, HPos.CENTER);
+        submit.setMaxHeight(Double.MAX_VALUE);
+        gridPane.add(submit, 0, 6, 3, 1);
+        GridPane.setHalignment(submit, HPos.CENTER);
 
-        //GridPane.setHalignment(popupContent, HPos.CENTER);
-
+        //Styling Nodes
         text0.setStyle("-fx-font: normal bold 20px 'serif' ");
         gridPane.setStyle("-fx-background-color: BEIGE;");
 
@@ -182,6 +196,7 @@ public class EditTask extends Application {
         primaryStage.show();
     }
 
+    //editTask updates task table with new user inputted values for a task
     private void editTask(Stage stage, int taskID, int userID, String startDateText, String startTime, String endDateText, String endTime, String title, String description)
     {
 

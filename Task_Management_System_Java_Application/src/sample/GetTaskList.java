@@ -2,16 +2,14 @@ package sample;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.sql.*;
 import java.util.ArrayList;
 
 public class GetTaskList {
 
+    //Search for Tasks function call to retrieve task list
     public static ObservableList<Task> retrieveTaskList(int userID, String startDate, String startTime, String endDate, String endTime, String duration, String title, String description)
     {
-        //todo description field does not work!!!
-        //todo make sure to change title so that user does not have to put in exact title
         String sql;
 
         if(!title.isEmpty() &&  startDate.isEmpty() && startTime.isEmpty() && endDate.isEmpty() && endTime.isEmpty() && duration.isEmpty() && description.isEmpty())
@@ -58,10 +56,11 @@ public class GetTaskList {
 
         try
         {
-
             Connection connection = SetDatabaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
+
+            //Converts the ArrayList to an ObservableList and returns the List
             ObservableList<Task> dbData = FXCollections.observableArrayList(dataBaseArrayList(resultSet));
             return dbData;
         }
@@ -73,17 +72,18 @@ public class GetTaskList {
 
     }
 
+    //Tasks for this Week function call to retrieve task list
     public static ObservableList<Task> retrieveTaskList(int userID, String startDate, String weekFromStartDate)
     {
-        //todo make sure to change title so that user does not have to put in exact title
         String sql = "SELECT * FROM task WHERE User_ID = " + userID + " AND DATE(Start_date_time) >= '" + startDate + "' AND DATE(Start_date_time) <= '" + weekFromStartDate + "' ORDER BY Start_date_time";
 
         try
         {
-
             Connection connection = SetDatabaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
+
+            //Converts the ArrayList to an ObservableList and returns the List
             ObservableList<Task> dbData = FXCollections.observableArrayList(dataBaseArrayList(resultSet));
             return dbData;
         }
@@ -97,11 +97,15 @@ public class GetTaskList {
 
     private static ArrayList<Task> dataBaseArrayList(ResultSet resultSet) throws SQLException {
         ArrayList<Task> data =  new ArrayList<>();
-        while (resultSet.next()) {
+
+        //Loops through the ResultSet and stores the data in each row in a new Task object
+        while (resultSet.next())
+        {
             Task task = new Task(resultSet.getInt("Task_ID"), resultSet.getInt("User_ID"), resultSet.getTimestamp("Start_date_time"), resultSet.getTimestamp("End_date_time"), resultSet.getInt("Duration"), resultSet.getString("Title"), resultSet.getString("Description_of_task"));
+
+            //Adds the new Task object to the data ArrayList
             data.add(task);
         }
         return data;
     }
-
 }

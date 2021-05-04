@@ -10,38 +10,35 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+//Year and Month Calendar Screen
 public class YearAndMonthCalendarView extends Application {
 
     private int userID;
 
+    //Constructor
     public YearAndMonthCalendarView(int userID) {
         this.userID = userID;
     }
 
     public void start(Stage stage)
     {
-        //todo button that will take the user to the current date - call it return to current date
-
+        //Text and TextField
         Text text0 = new Text("Month & Year");
-
         Text text1 = new Text("Year: ");
 
         TextField year = new TextField();
 
-
         DayAndMonthCalendarView dayAndMonthCalendarView = new DayAndMonthCalendarView(userID);
 
-        //Creating Buttons
+        //January button
         Button january = new Button("January");
         january.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                System.out.println("jan button pushed");
+                System.out.println("Jan button pushed");
                 try
                 {
                     String yearInput = year.getText();
@@ -55,10 +52,11 @@ public class YearAndMonthCalendarView extends Application {
             }
         });
 
+        //February button
         Button february = new Button("February");
         february.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                System.out.println("calendar button pushed");
+                System.out.println("Feb button pushed");
                 try
                 {
                     String yearInput = year.getText();
@@ -73,10 +71,11 @@ public class YearAndMonthCalendarView extends Application {
             }
         });
 
+        //March button
         Button march = new Button("March");
         march.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                System.out.println("calendar button pushed");
+                System.out.println("Mar button pushed");
                 try
                 {
                     String yearInput = year.getText();
@@ -91,10 +90,11 @@ public class YearAndMonthCalendarView extends Application {
             }
         });
 
+        //April button
         Button april = new Button("April");
         april.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                System.out.println("calendar button pushed");
+                System.out.println("Apr button pushed");
                 try
                 {
                     String yearInput = year.getText();
@@ -108,10 +108,11 @@ public class YearAndMonthCalendarView extends Application {
             }
         });
 
+        //May button
         Button may = new Button("May");
         may.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                System.out.println("calendar button pushed");
+                System.out.println("May button pushed");
                 try
                 {
                     String yearInput = year.getText();
@@ -125,10 +126,11 @@ public class YearAndMonthCalendarView extends Application {
             }
         });
 
+        //June button
         Button june = new Button("June");
         june.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                System.out.println("calendar button pushed");
+                System.out.println("June button pushed");
                 try
                 {
                     String yearInput = year.getText();
@@ -143,10 +145,11 @@ public class YearAndMonthCalendarView extends Application {
             }
         });
 
+        //July button
         Button july = new Button("July");
         july.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                System.out.println("calendar button pushed");
+                System.out.println("July button pushed");
                 try
                 {
                     String yearInput = year.getText();
@@ -160,10 +163,11 @@ public class YearAndMonthCalendarView extends Application {
             }
         });
 
+        //August button
         Button august = new Button("August");
         august.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                System.out.println("calendar button pushed");
+                System.out.println("Aug button pushed");
                 try
                 {
                     String yearInput = year.getText();
@@ -178,10 +182,11 @@ public class YearAndMonthCalendarView extends Application {
             }
         });
 
+        //September button
         Button september = new Button("September");
         september.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                System.out.println("calendar button pushed");
+                System.out.println("Sept button pushed");
                 try
                 {
                     String yearInput = year.getText();
@@ -196,10 +201,11 @@ public class YearAndMonthCalendarView extends Application {
             }
         });
 
+        //October button
         Button october = new Button("October");
         october.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                System.out.println("calendar button pushed");
+                System.out.println("Oct button pushed");
                 try
                 {
                     String yearInput = year.getText();
@@ -214,10 +220,11 @@ public class YearAndMonthCalendarView extends Application {
             }
         });
 
+        //November button
         Button november = new Button("November");
         november.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                System.out.println("calendar button pushed");
+                System.out.println("Nov button pushed");
                 try
                 {
                     String yearInput = year.getText();
@@ -231,10 +238,11 @@ public class YearAndMonthCalendarView extends Application {
             }
         });
 
+        //December button
         Button december = new Button("December");
         december.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                System.out.println("calendar button pushed");
+                System.out.println("Dec button pushed");
                 try
                 {
                     String yearInput = year.getText();
@@ -245,19 +253,20 @@ public class YearAndMonthCalendarView extends Application {
                 {
                     System.out.println(e);
                 }
-
             }
         });
 
+        //Menu button
         Button menu = new Button("Menu");
         menu.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                System.out.println("Return button pushed");
+                System.out.println("Menu button pushed");
                 UserMenu userMenu = new UserMenu(userID);
                 userMenu.start(stage);
             }
         });
 
+        //Current Date button
         Button currentDate = new Button("Current Date");
         currentDate.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -268,11 +277,9 @@ public class YearAndMonthCalendarView extends Application {
             }
         });
 
+        //GridPane set up
         GridPane gridPane = new GridPane();
-        //GridPane gp=new GridPane();
-        //Setting size for the pane
         gridPane.setMinSize(400, 400);
-        //gridPane.setGridLinesVisible(true);
 
         //Setting the padding
         gridPane.setPadding(new Insets(10, 10, 10, 10));
@@ -291,23 +298,6 @@ public class YearAndMonthCalendarView extends Application {
         gridPane.add(text1, 0, 1, 1, 1);
         GridPane.setHalignment(text1, HPos.CENTER);
         gridPane.add(year, 1, 1, 3, 1);
-        //GridPane.setHgrow(year, Priority.ALWAYS);
-
-        menu.setMaxWidth(Double.MAX_VALUE);
-        currentDate.setMaxWidth(Double.MAX_VALUE);
-
-        january.setMaxWidth(Double.MAX_VALUE);
-        february.setMaxWidth(Double.MAX_VALUE);
-        march.setMaxWidth(Double.MAX_VALUE);
-        april.setMaxWidth(Double.MAX_VALUE);
-        may.setMaxWidth(Double.MAX_VALUE);
-        june.setMaxWidth(Double.MAX_VALUE);
-        july.setMaxWidth(Double.MAX_VALUE);
-        august.setMaxWidth(Double.MAX_VALUE);
-        september.setMaxWidth(Double.MAX_VALUE);
-        october.setMaxWidth(Double.MAX_VALUE);
-        november.setMaxWidth(Double.MAX_VALUE);
-        december.setMaxWidth(Double.MAX_VALUE);
 
         gridPane.add(january, 0, 2);
         gridPane.add(february, 1, 2);
@@ -324,9 +314,27 @@ public class YearAndMonthCalendarView extends Application {
         gridPane.add(november, 2, 4);
         gridPane.add(december, 3, 4);
 
-        gridPane.add(menu, 3, 5);
         gridPane.add(currentDate, 0, 5);
+        gridPane.add(menu, 3, 5);
 
+        //Setting all buttons to max width
+        january.setMaxWidth(Double.MAX_VALUE);
+        february.setMaxWidth(Double.MAX_VALUE);
+        march.setMaxWidth(Double.MAX_VALUE);
+        april.setMaxWidth(Double.MAX_VALUE);
+        may.setMaxWidth(Double.MAX_VALUE);
+        june.setMaxWidth(Double.MAX_VALUE);
+        july.setMaxWidth(Double.MAX_VALUE);
+        august.setMaxWidth(Double.MAX_VALUE);
+        september.setMaxWidth(Double.MAX_VALUE);
+        october.setMaxWidth(Double.MAX_VALUE);
+        november.setMaxWidth(Double.MAX_VALUE);
+        december.setMaxWidth(Double.MAX_VALUE);
+
+        currentDate.setMaxWidth(Double.MAX_VALUE);
+        menu.setMaxWidth(Double.MAX_VALUE);
+
+        //Set Hgrow Priority for all the buttons
         GridPane.setHgrow(january, Priority.ALWAYS);
         GridPane.setHgrow(february, Priority.ALWAYS);
         GridPane.setHgrow(march, Priority.ALWAYS);
@@ -343,19 +351,12 @@ public class YearAndMonthCalendarView extends Application {
         GridPane.setHgrow(currentDate, Priority.ALWAYS);
         GridPane.setHgrow(menu, Priority.ALWAYS);
 
+        //Styling nodes
         text0.setStyle("-fx-font: normal bold 20px 'serif' ");
         menu.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         currentDate.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
-
-/*
-        //Styling nodes
-        calendar.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
-        task.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
-        logOut.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
-
-
-*/
         gridPane.setStyle("-fx-background-color: BEIGE;");
+
         //Creating a scene object
         Scene scene = new Scene(gridPane);
 

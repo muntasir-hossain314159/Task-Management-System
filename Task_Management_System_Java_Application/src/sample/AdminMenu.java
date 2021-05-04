@@ -12,27 +12,21 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+//Admin Menu Screen
 public class AdminMenu extends Application{
 
     private int ID;
 
+    //Constructor
     public AdminMenu(int ID) {
         this.ID = ID;
     }
 
     public void start(Stage stage) {
+        //Text
         Text text0 = new Text("Admin Menu");
 
-        //Creating Buttons
-        Button adminLoginInformation = new Button("Update Admin Login Information");
-        adminLoginInformation.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                UpdateAdminAccount updateAdminAccount = new UpdateAdminAccount(ID);
-                updateAdminAccount.start(stage);
-                System.out.println("Admin Login button pushed");
-            }
-        });
-
+        //New User List button
         Button newUserList = new Button("New User List");
         newUserList.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -42,6 +36,7 @@ public class AdminMenu extends Application{
             }
         });
 
+        //Approved User List button
         Button approvedUserList = new Button("Approved User List");
         approvedUserList.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -51,8 +46,9 @@ public class AdminMenu extends Application{
             }
         });
 
-        Button newAdminAccount = new Button("Create New Admin Account");
-        newAdminAccount.setOnAction(new EventHandler<ActionEvent>() {
+        //Create New Admin Account button
+        Button createNewAdminAccount = new Button("Create New Admin Account");
+        createNewAdminAccount.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 System.out.println("Create New Admin Account button pushed");
                 CreateNewAdminAccount createNewAdminAccount = new CreateNewAdminAccount(ID);
@@ -60,6 +56,17 @@ public class AdminMenu extends Application{
             }
         });
 
+        //Update Admin Account button
+        Button updateAdminLoginInformation = new Button("Update Admin Login Information");
+        updateAdminLoginInformation.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                UpdateAdminAccount updateAdminAccount = new UpdateAdminAccount(ID);
+                updateAdminAccount.start(stage);
+                System.out.println("Update Admin Login Information button pushed");
+            }
+        });
+
+        //Log Out button
         Button logOut = new Button("Log Out");
         logOut.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -71,10 +78,9 @@ public class AdminMenu extends Application{
 
         //Creating a Grid Pane
         GridPane gridPane = new GridPane();
-        //GridPane gp=new GridPane();
-        //Setting size for the pane
+
         gridPane.setMinSize(400, 400);
-        //gridPane.setGridLinesVisible(true);
+
 
         //Setting the padding
         gridPane.setPadding(new Insets(10, 10, 10, 10));
@@ -83,10 +89,11 @@ public class AdminMenu extends Application{
         gridPane.setVgap(10);
         gridPane.setHgap(10);
 
+        //Setting all buttons to max width
         newUserList.setMaxWidth(Double.MAX_VALUE);
         approvedUserList.setMaxWidth(Double.MAX_VALUE);
-        newAdminAccount.setMaxWidth(Double.MAX_VALUE);
-        adminLoginInformation.setMaxWidth(Double.MAX_VALUE);
+        createNewAdminAccount.setMaxWidth(Double.MAX_VALUE);
+        updateAdminLoginInformation.setMaxWidth(Double.MAX_VALUE);
         logOut.setMaxWidth(Double.MAX_VALUE);
 
         //Setting the Grid alignment
@@ -97,25 +104,21 @@ public class AdminMenu extends Application{
         GridPane.setHalignment(text0, HPos.CENTER);
 
         gridPane.add(newUserList, 0, 1, 1, 1);
-        //GridPane.setHalignment(newUserList, HPos.CENTER);
 
         gridPane.add(approvedUserList, 0, 2, 1, 1);
 
-        gridPane.add(newAdminAccount, 0, 3, 1, 1);
-        //GridPane.setHalignment(newAdminAccount, HPos.CENTER);
+        gridPane.add(createNewAdminAccount, 0, 3, 1, 1);
 
-        gridPane.add(adminLoginInformation, 0, 4, 1, 1);
-        //GridPane.setHalignment(adminLoginInformation, HPos.CENTER);
+        gridPane.add(updateAdminLoginInformation, 0, 4, 1, 1);
 
         gridPane.add(logOut, 0, 5, 1, 1);
-        //GridPane.setHalignment(logOut, HPos.CENTER);
 
 
         //Styling nodes
         approvedUserList.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
-        adminLoginInformation.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+        updateAdminLoginInformation.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         newUserList.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
-        newAdminAccount.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+        createNewAdminAccount.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         logOut.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         text0.setStyle("-fx-font: normal bold 20px 'serif' ");
         gridPane.setStyle("-fx-background-color: BEIGE;");

@@ -1,13 +1,16 @@
 package sample;
 
+//NewUser class stores the data from a ResultSet in GetNewUserList class
 public class NewUser {
 
     private int ID;
     private String username = null;
     private String password = null;
 
+    //Constructor
     public NewUser() {}
 
+    //Constructor
     public NewUser(int ID, String username, String password) {
         this.ID = ID;
         this.username = username;

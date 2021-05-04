@@ -11,23 +11,24 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.time.LocalDate;
 
-import static java.util.Calendar.DATE;
-
+//User Menu Screen
 public class UserMenu extends Application{
 
     private int ID;
 
+    //Constructor
     public UserMenu(int ID) {
         this.ID = ID;
     }
 
-    public void start(Stage stage) {
+    public void start(Stage stage)
+    {
+        //Header
         Text text0 = new Text("Menu");
 
-        //Creating Buttons
+        //Calendar button
         Button calendar = new Button("Calendar");
         calendar.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -37,6 +38,7 @@ public class UserMenu extends Application{
             }
         });
 
+        //Tasks for this Week button
         Button tasksForWeek  = new Button("Tasks for this Week");
         tasksForWeek.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -47,17 +49,7 @@ public class UserMenu extends Application{
             }
         });
 
-
-        Button searchForTasks = new Button("Search for Tasks");
-        searchForTasks.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                System.out.println("Search for Tasks button pushed");
-                SearchTasks searchTasks = new SearchTasks(ID);
-                searchTasks.start(stage);
-            }
-        });
-
-
+        //Create New Task button
         Button createNewTask = new Button("Create New Task");
         createNewTask.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -67,6 +59,17 @@ public class UserMenu extends Application{
             }
         });
 
+        //Search for Tasks button
+        Button searchForTasks = new Button("Search for Tasks");
+        searchForTasks.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                System.out.println("Search for Tasks button pushed");
+                SearchTasks searchTasks = new SearchTasks(ID);
+                searchTasks.start(stage);
+            }
+        });
+
+        //Delete User Account button
         Button deleteUserAccount = new Button("Delete User Account");
         deleteUserAccount.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -75,6 +78,7 @@ public class UserMenu extends Application{
             }
         });
 
+        //Log Out button
         Button logOut = new Button("Log Out");
         logOut.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -84,6 +88,7 @@ public class UserMenu extends Application{
             }
         });
 
+        //Exit button
         Button exit = new Button("Exit");
         exit.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -93,20 +98,20 @@ public class UserMenu extends Application{
             }
         });
 
+        //Setting all buttons to max width
         calendar.setMaxWidth(Double.MAX_VALUE);
+        tasksForWeek.setMaxWidth(Double.MAX_VALUE);
         createNewTask.setMaxWidth(Double.MAX_VALUE);
         searchForTasks.setMaxWidth(Double.MAX_VALUE);
-        tasksForWeek.setMaxWidth(Double.MAX_VALUE);
-        logOut.setMaxWidth(Double.MAX_VALUE);
         deleteUserAccount.setMaxWidth(Double.MAX_VALUE);
+        logOut.setMaxWidth(Double.MAX_VALUE);
         exit.setMaxWidth(Double.MAX_VALUE);
 
         //Creating a Grid Pane
         GridPane gridPane = new GridPane();
-        //GridPane gp=new GridPane();
+
         //Setting size for the pane
         gridPane.setMinSize(400, 400);
-        //gridPane.setGridLinesVisible(true);
 
         //Setting the padding
         gridPane.setPadding(new Insets(10, 10, 10, 10));
@@ -130,16 +135,15 @@ public class UserMenu extends Application{
         gridPane.add(logOut, 0, 6, 1, 1);
         gridPane.add(exit, 0, 7, 1, 1);
 
-
-
         //Styling nodes
         calendar.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         tasksForWeek.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         createNewTask.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         searchForTasks.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         deleteUserAccount.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
-        exit.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         logOut.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+        exit.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+
         text0.setStyle("-fx-font: normal bold 20px 'serif' ");
         gridPane.setStyle("-fx-background-color: BEIGE;");
 
@@ -149,7 +153,7 @@ public class UserMenu extends Application{
         //Setting title to the Stage
         stage.setTitle("User Menu");
 
-        //Adding scene to the stage
+        //Adding scene to the stage and centering the stage
         stage.setScene(scene);
         stage.centerOnScreen();
 

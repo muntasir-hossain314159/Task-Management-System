@@ -13,28 +13,35 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.TableView;
 
-
+//NewUserTableViewScreen class displays a table of New Users that have been assigned to the logged in admin
 public class NewUserTableViewScreen extends Application {
 
     private int adminID;
+
+    //Constructor
     public NewUserTableViewScreen(int ID)
     {
         this.adminID = ID;
     }
 
+
     public void start(Stage stage)
     {
         TableView<NewUser> tableView = new TableView<>();
 
+        //Initializes the ObservableList for new users
         ObservableList<NewUser> newUserList = GetNewUserList.retrieveNewUserList(adminID);
-        // Add rows to the TableView
+
+        //Add rows to the TableView
         tableView.getItems().addAll(newUserList);
-        // Add columns to the TableView
+
+        //Add columns to the TableView
         tableView.getColumns().addAll(NewUserTableViewHelper.getUsernameColumn(), NewUserTableViewHelper.getPasswordColumn(), NewUserTableViewHelper.addApproveButtonToTable(), NewUserTableViewHelper.addRejectButtonToTable());
 
-        //GridPane gridPane = TableViewHelper.getNewUserListGridPane(stage, adminID);
+        //Set the column resize policy to constrained resize policy
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-
+        //Refresh button
         Button refreshButton = new Button("Refresh");
         refreshButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -42,6 +49,7 @@ public class NewUserTableViewScreen extends Application {
             }
         });
 
+        //Return to Menu button
         Button returnToAdminMenu = new Button("Return to Menu");
         returnToAdminMenu.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -49,6 +57,7 @@ public class NewUserTableViewScreen extends Application {
             }
         });
 
+        //Set HBox and align Nodes
         HBox leftBox = new HBox(refreshButton);
         leftBox.setAlignment(Pos.TOP_LEFT);
 
@@ -60,20 +69,14 @@ public class NewUserTableViewScreen extends Application {
         HBox.setHgrow(leftBox, Priority.ALWAYS);
         HBox.setHgrow(rightBox, Priority.ALWAYS);
 
-        ///*
-        //Set the column resize policy to constrained resize policy
-        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        // Set the Placeholder for an empty table
-        //tableView.setPlaceholder(new Label("No visible columns and/or data exist."));
-        //*/
-
-        // Create the VBox
+        //Create the VBox
         VBox root = new VBox();
-        // Add the Table to the VBox
-        root.getChildren().addAll(tableView, hbox);
         root.setPrefWidth(600);
-        //root.setAlignment(Pos.CENTER);
-        // Set the Padding and Border for the VBox
+
+        //Add the TableView to the VBox
+        root.getChildren().addAll(tableView, hbox);
+
+        //Set the Padding and Border for the VBox
         root.setStyle("-fx-padding: 10;" +
                 "-fx-border-style: solid inside;" +
                 "-fx-border-width: 2;" +
@@ -81,15 +84,16 @@ public class NewUserTableViewScreen extends Application {
                 "-fx-border-radius: 5;" +
                 "-fx-border-color: blue;");
 
-        // Create the Scene
+        //Create the Scene
         Scene scene = new Scene(root);
-        // Add the Scene to the Stage
+
+        //Add the Scene to the Stage
         stage.setScene(scene);
-        // Set the Title of the Stage
+
+        //Set the Title of the Stage
         stage.setTitle("New User List");
 
-        //stage.setFullScreen(true);
-        // Display the Stage
+        //Display the Stage
         stage.show();
     }
 

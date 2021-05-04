@@ -18,60 +18,47 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
+//Create New Task Screen
 public class CreateNewTask extends Application {
 
     private int ID;
 
+    //Constructor
     public CreateNewTask(int ID) {
         this.ID = ID;
     }
 
     public void start(Stage primaryStage)
     {
-        Button menu = new Button("Menu");
-        menu.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                System.out.println("Return button pushed");
-                UserMenu userMenu = new UserMenu(ID);
-                userMenu.start(primaryStage);
-            }
-        });
+        //Texts and Text Fields
+        Text createNewTask = new Text("Create New Task");
 
-        Button help = new Button("Help");
-        help.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                System.out.println("Help button pushed");
-                new CreateTaskInformation().start(new Stage());
-            }
-        });
-
-
-
-        Text text0 = new Text("Create New Task");
-
-        TextField title = new TextField();
         Text titleName = new Text("Title");
+        TextField title = new TextField();
 
+        Text startTimeName = new Text("Start Date & Time");
+        TextField startTime = new TextField();
 
+        //Start Date Calendar
         DatePicker startDate = new DatePicker(LocalDate.now());
         startDate.setEditable(true);
         startDate.setShowWeekNumbers(true);
-        TextField startTime = new TextField();
-        Text startTimeName = new Text("Start Date & Time");
 
+        Text endTimeName = new Text("End Date & Time");
+        TextField endTime = new TextField();
+
+        //End Date Calendar
         DatePicker endDate = new DatePicker(LocalDate.now());
         endDate.setEditable(true);
         endDate.setShowWeekNumbers(true);
-        TextField endTime = new TextField();
-        Text endTimeName = new Text("End Date & Time");
 
-        TextField description = new TextField();
         Text descriptionName = new Text("Description");
+        TextField description = new TextField();
 
-        Button addButton = new Button("Add Task");
-        addButton.setOnAction(new EventHandler<ActionEvent>() {
+        //Add Task button
+        Button addTaskButton = new Button("Add Task");
+        addTaskButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 System.out.println("Add task button pushed");
                 String titleText = title.getText();
@@ -80,7 +67,7 @@ public class CreateNewTask extends Application {
                 String startDateText = "";
                 if(startDateTime != null)
                     startDateText= startDateTime.toString();
-                //startDateText = startDateTime.format(DateTimeFormatter.ofPattern("yyyy?MM?dd"));
+
                 String startTimeText = startTime.getText();
                 System.out.println(startDateText);
 
@@ -88,31 +75,51 @@ public class CreateNewTask extends Application {
                 String endDateText = "";
                 if(endDateTime != null)
                     endDateText = endDateTime.toString();
-                //String endDateText = endDateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+
                 String endTimeText = endTime.getText();
                 System.out.println(endDateText);
 
                 String descriptionText = description.getText();
 
                 boolean check = checkForConflict(ID, startDateText, startTimeText, endDateText, endTimeText);
+                //if check == true, add the user inputted values into the task table
                 if(check)
                     addTask(ID, titleText, startDateText, startTimeText, endDateText, endTimeText, descriptionText);
 
-                //System.out.println("This");
+                //Set fields to their initial state
                 title.setText("");
                 startDate.setValue(LocalDate.now());
                 startTime.setText("");
                 endDate.setValue(LocalDate.now());
                 endTime.setText("");
                 description.setText("");
-                //System.out.println("Task added successfully");
             }
         });
 
+        //Menu button
+        Button menu = new Button("Menu");
+        menu.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                System.out.println("Menu button pushed");
+                UserMenu userMenu = new UserMenu(ID);
+                userMenu.start(primaryStage);
+            }
+        });
+
+        //Help button
+        Button help = new Button("Help");
+        help.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                System.out.println("Help button pushed");
+                new CreateTaskInformation().start(new Stage());
+            }
+        });
+
+        //GridPane set up
         GridPane gridPane = new GridPane();
+
         //Setting size for the pane
         gridPane.setMinSize(400, 400);
-        //gridPane.setGridLinesVisible(true);
 
         //Setting the padding
         gridPane.setPadding(new Insets(10, 10, 10, 10));
@@ -125,8 +132,8 @@ public class CreateNewTask extends Application {
         gridPane.setAlignment(Pos.CENTER);
 
         //Arranging all the nodes in the grid
-        gridPane.add(text0, 0, 0, 3, 1);
-        GridPane.setHalignment(text0, HPos.CENTER);
+        gridPane.add(createNewTask, 0, 0, 3, 1);
+        GridPane.setHalignment(createNewTask, HPos.CENTER);
 
         gridPane.add(titleName, 0, 2, 1, 1);
         gridPane.add(title, 1, 2, 1, 1);
@@ -142,20 +149,18 @@ public class CreateNewTask extends Application {
         gridPane.add(descriptionName, 0, 5, 1, 1);
         gridPane.add(description, 1, 5, 1, 1);
 
-        //menu.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         gridPane.add(menu, 0, 6, 1, 1);
         GridPane.setHalignment(menu, HPos.CENTER);
 
-        addButton.setMaxHeight(Double.MAX_VALUE);
-        gridPane.add(addButton, 1, 6, 1, 1);
-        GridPane.setHalignment(addButton, HPos.CENTER);
+        addTaskButton.setMaxHeight(Double.MAX_VALUE);
+        gridPane.add(addTaskButton, 1, 6, 1, 1);
+        GridPane.setHalignment(addTaskButton, HPos.CENTER);
 
         gridPane.add(help, 2, 6, 1, 1);
         GridPane.setHalignment(help, HPos.CENTER);
 
-        //GridPane.setHalignment(popupContent, HPos.CENTER);
-
-        text0.setStyle("-fx-font: normal bold 20px 'serif' ");
+        //Set GridPane and Node style
+        createNewTask.setStyle("-fx-font: normal bold 20px 'serif' ");
         gridPane.setStyle("-fx-background-color: BEIGE;");
 
         //Creating a scene object
@@ -173,8 +178,10 @@ public class CreateNewTask extends Application {
 
     private boolean checkForConflict(int ID, String startDateText, String startTime, String endDateText, String endTime)
     {
+        //If no conflict exists, check = true
         boolean check = true;
 
+        //Execute SQL query to determine if the start time or end time of the current task is between the start time and end time of another task
         String sql1 = "SELECT * FROM task WHERE Start_date_time <= '" + startDateText + startTime + "' AND End_date_time >= '" + startDateText + startTime + "' AND User_ID = " + ID;
         String sql2 = "SELECT * FROM task WHERE Start_date_time <= '" + endDateText + endTime + "' AND End_date_time >= '" + endDateText + endTime + "' AND User_ID = " + ID;
 
@@ -183,12 +190,13 @@ public class CreateNewTask extends Application {
             PreparedStatement preparedStatement = connection.prepareStatement(sql1);
             ResultSet resultSet1 = preparedStatement.executeQuery();
 
-
             PreparedStatement preparedStatement1 = connection.prepareStatement(sql2);
             ResultSet resultSet2 = preparedStatement1.executeQuery();
 
-            if(resultSet1.next() || resultSet2.next()) {
-
+            //If there exists such a task from the SQL query, then there is a conflict between tasks
+            if(resultSet1.next() || resultSet2.next())
+            {
+                //Display Conflict Error screen and wait for user input
                 ConflictErrorScreen conflictErrorScreen = new ConflictErrorScreen();
                 conflictErrorScreen.start(new Stage());
                 check = conflictErrorScreen.setCheck();
@@ -197,16 +205,15 @@ public class CreateNewTask extends Application {
         }
         catch (Exception e)
         {
-            System.out.println("Big error");
+            System.out.println("Error");
         }
 
         return check;
     }
+
+    //Adds user inputted values into Task table
     private void addTask(int ID, String title, String startDateText, String startTime, String endDateText, String endTime, String description)
     {
-        //todo add date button, add a datepicker field if possible
-
-
         String sql = "INSERT INTO task (Task_ID, User_ID, Start_date_time, End_date_time, Duration, Title, Description_of_task)"
                    + " VALUES (0, " + ID + ", '" + startDateText + " " + startTime + "', '" + endDateText + " " +  endTime + "', TIMESTAMPDIFF(MINUTE, '" + startDateText + " " + startTime   + "', '" + endDateText + " " +  endTime + "'), '" + title + "', '"+ description + "');";
 
@@ -215,6 +222,8 @@ public class CreateNewTask extends Application {
             Connection connection = SetDatabaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
+
+            //Display Task Added Successfully screen if there is no error
             new WindowTaskScreen().start(new Stage(), true);
 
 
@@ -222,15 +231,11 @@ public class CreateNewTask extends Application {
         catch (Exception e)
         {
             System.out.println(e);
+
+            //Display Task Not Added Successfully Screen if there is an error
             new WindowTaskScreen().start(new Stage(), false);
         }
-
-
     }
-
-
-
-
 }
 
 

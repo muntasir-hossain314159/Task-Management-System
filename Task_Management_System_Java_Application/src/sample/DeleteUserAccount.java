@@ -11,59 +11,56 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
+//Delete User Account Screen
 public class DeleteUserAccount extends Application {
 
     private int ID;
 
+    //Constructor
     public DeleteUserAccount(int ID) {
         this.ID = ID;
     }
 
-    public void start(Stage stage) {
-
+    public void start(Stage stage)
+    {
+        //Texts
         Text text0 = new Text("Delete User Account");
+        Text text1 = new Text("Are you sure you want to delete your account: ");
 
+        //Yes button
+        Button yes = new Button("Yes");
+        yes.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                System.out.println("Yes button pushed");
+                deleteAccount(ID, stage);
+            }
+        });
+
+        //Menu button
         Button menu = new Button("Return to Menu");
         menu.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                System.out.println("Return button pushed");
+                System.out.println("Return to Menu button pushed");
                 UserMenu userMenu = new UserMenu(ID);
                 userMenu.start(stage);
             }
         });
 
-
-        Text text1 = new Text("Are you sure you want to delete your account: ");
-        Button yes = new Button("Yes");
-        yes.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                System.out.println("Delete account button pushed");
-                deleteAccount(ID, stage);
-            }
-        });
-
-
-
         //Creating a Grid Pane
         GridPane gridPane = new GridPane();
-        //GridPane gp=new GridPane();
-        //Setting size for the pane
-        gridPane.setMinSize(400, 400);
-        //gridPane.setGridLinesVisible(true);
 
-        //Setting the padding
+        gridPane.setMinSize(400, 400);
         gridPane.setPadding(new Insets(10, 10, 10, 10));
 
         //Setting the vertical and horizontal gaps between the columns
         gridPane.setVgap(10);
         gridPane.setHgap(5);
 
+        //Set Yes button to max width
         yes.setMaxWidth(Double.MAX_VALUE);
-        //menu.setMaxWidth(8);
 
         //Setting the Grid alignment
         gridPane.setAlignment(Pos.CENTER);
@@ -73,14 +70,11 @@ public class DeleteUserAccount extends Application {
         GridPane.setHalignment(text0, HPos.CENTER);
 
         gridPane.add(text1, 0, 1, 1, 1);
-        //GridPane.setHalignment(newUserList, HPos.CENTER);
 
         gridPane.add(yes, 1, 1, 1, 1);
 
         gridPane.add(menu, 0, 2, 2, 1);
         GridPane.setHalignment(menu, HPos.CENTER);
-
-
 
         //Styling nodes
         yes.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
@@ -102,26 +96,26 @@ public class DeleteUserAccount extends Application {
         //Displaying the contents of the stage
         stage.show();
     }
+
+    //Deletes logged in User from approved_user_account table
     private void deleteAccount(int ID, Stage stage)
     {
         try
         {
-
-            String sql2 = "DELETE FROM approved_user_account WHERE Approved_user_ID LIKE BINARY " + ID + ";";
-
             Connection connection = SetDatabaseConnection.getConnection();
 
-            PreparedStatement preparedStatement2 = connection.prepareStatement(sql2);
+            //Executes SQL query to delete user from approved_user_account table
+            String sql = "DELETE FROM approved_user_account WHERE Approved_user_ID LIKE BINARY " + ID + ";";
 
-            preparedStatement2.executeUpdate();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.executeUpdate();
 
+            //Returns to User Login page
             new UserLogin().start(stage);
         }
         catch (Exception e)
         {
             System.out.println(e);
         }
-
     }
-
 }

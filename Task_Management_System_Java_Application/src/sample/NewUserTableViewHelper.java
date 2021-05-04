@@ -8,13 +8,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-
+//NewUserTableViewHelper class is used to create TableColumns that are added to the TableView
 public class NewUserTableViewHelper {
 
+    //Username Column
     public static TableColumn<NewUser, String> getUsernameColumn()
     {
         TableColumn<NewUser, String> usernameCol = new TableColumn<>("Username");
@@ -23,6 +23,7 @@ public class NewUserTableViewHelper {
         return usernameCol;
     }
 
+    //Password Column
     public static TableColumn<NewUser, String> getPasswordColumn() {
         TableColumn<NewUser, String> passwordCol = new TableColumn<>("Password");
         PropertyValueFactory<NewUser, String> passwordCellValueFactory = new PropertyValueFactory<>("password");
@@ -30,6 +31,7 @@ public class NewUserTableViewHelper {
         return passwordCol;
     }
 
+    //Approve Button column (adds an approve button to each row of data)
     public static TableColumn<NewUser, Void> addApproveButtonToTable()
     {
         TableColumn<NewUser, Void> colBtn = new TableColumn<>("Approve User");
@@ -51,7 +53,7 @@ public class NewUserTableViewHelper {
                                 insertNewUser(newUser);
                                 deleteNewUser(newUser);
                                 tableView.getItems().remove(newUser);
-                                System.out.println("Button clicked");
+                                System.out.println("Approve button clicked");
                             }
                         });
                     }
@@ -75,6 +77,7 @@ public class NewUserTableViewHelper {
         return colBtn;
     }
 
+    //Reject Button column (adds a reject button to each row of data)
     public static TableColumn<NewUser, Void> addRejectButtonToTable()
     {
         TableColumn<NewUser, Void> colBtn = new TableColumn<>("Reject User");
@@ -94,7 +97,7 @@ public class NewUserTableViewHelper {
                                 NewUser newUser = tableView.getItems().get(getIndex());
                                 tableView.getItems().remove(newUser);
                                 deleteNewUser(newUser);
-                                System.out.println("Button clicked");
+                                System.out.println("Reject button clicked");
                             }
                         });
                     }
@@ -118,6 +121,7 @@ public class NewUserTableViewHelper {
         return colBtn;
     }
 
+    //Inserts a new user into the approved_user_account table when an admin approves that user
     private static void insertNewUser(NewUser newUser) {
         int ID = newUser.getID();
         String username = newUser.getUsername();
@@ -128,8 +132,9 @@ public class NewUserTableViewHelper {
 
         try
         {
-            String sql = "INSERT INTO approved_user_account VALUES (" + ID + ", '" + username + "', '" + password + "')";
             Connection connection = SetDatabaseConnection.getConnection();
+
+            String sql = "INSERT INTO approved_user_account VALUES (" + ID + ", '" + username + "', '" + password + "')";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
         }
@@ -139,26 +144,22 @@ public class NewUserTableViewHelper {
         }
     }
 
+    //Deletes a new user by removing their data from the new_user_account table when an admin rejects that user
     private static void deleteNewUser(NewUser newUser) {
         int ID = newUser.getID();
         String username = newUser.getUsername();
         String password = newUser.getPassword();
+
         System.out.println(username);
         System.out.println(password);
 
         try
         {
-            //String sql1 = "SET FOREIGN_KEY_CHECKS = 0;";
-            String sql2 = "DELETE FROM new_user_account WHERE User_ID LIKE BINARY " + ID + ";";
-            //String sql3 = "SET FOREIGN_KEY_CHECKS = 1;";
             Connection connection = SetDatabaseConnection.getConnection();
-            //PreparedStatement preparedStatement1 = connection.prepareStatement(sql1);
-            PreparedStatement preparedStatement2 = connection.prepareStatement(sql2);
-            //PreparedStatement preparedStatement3 = connection.prepareStatement(sql3);
 
-            //preparedStatement1.executeUpdate();
-            preparedStatement2.executeUpdate();
-            //preparedStatement3.executeUpdate();
+            String sql = "DELETE FROM new_user_account WHERE User_ID LIKE BINARY " + ID + ";";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.executeUpdate();
         }
         catch (Exception e)
         {
@@ -166,6 +167,7 @@ public class NewUserTableViewHelper {
         }
     }
 
+    //Refreshes page by reloading the NewUserTableViewScreen
     public static void refreshPage(Stage stage, int ID)
     {
         System.out.println("Page has been refreshed");
@@ -173,6 +175,7 @@ public class NewUserTableViewHelper {
         newUserTableViewScreen.start(stage);
     }
 
+    //Returns to Admin Menu
     public static void returnToMenuPage(Stage stage, int adminID)
     {
         AdminMenu adminMenu = new AdminMenu(adminID);
