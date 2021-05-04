@@ -39,5 +39,5 @@ Each team member contributed equally towards the following roles: Programmer, Re
 6. [Presentation File](https://github.com/muntasir-hossain314159/Task-Management-System/blob/main/Task_Management_System_Presentation_File/CSCI-2210-01_Presentation%20File_WORA_00673995.pptx)
 7. [Progress Report](https://github.com/muntasir-hossain314159/Task-Management-System/blob/main/Task_Management_System_Progress_Report/CSCI-2210-01_Progress%20Report_WORA_00673995.pdf)
 
-## Copyright
+## Copyright Information
 Please contact Ahmed Muntasir Hossain (ahoss1@unh.newhaven.edu) for permission to use our application.
