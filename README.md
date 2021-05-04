@@ -14,11 +14,11 @@ Each team member contributed equally towards the following roles: Programmer, Re
 
 ### Specific Contributions to the Application:
 
-1. Ahmed Muntasir Hossain: Database Administrator, User Menu, Tasks for this Week, New User List 
-2. Emily R. Carlow: User Sign Up and Log in, Create New Admin Account, Approved User List  
-3. Anta R. Fall: Admin Sign Up and Log in
-4. Jake E. Sullivan: Database Administrator, Exit  
-5. Nathan A. Platt: Update Admin Account, Error Screen
+1. Ahmed Muntasir Hossain:  Database Administrator, User Menu, Tasks for this Week, New User List 
+2. Emily R. Carlow:         User Sign Up and Log in, Create New Admin Account, Approved User List  
+3. Anta R. Fall:            Admin Sign Up and Log in
+4. Jake E. Sullivan:        Database Administrator, Exit  
+5. Nathan A. Platt:         Update Admin Account, Error Screen
 
 
 
