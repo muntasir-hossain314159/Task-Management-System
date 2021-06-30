@@ -1,5 +1,5 @@
 # Task-Management-System
-This respository contains the source code for our Java application. It has all the files neccesary for the application to be designed and run.
+This repository contains the source code for our Java application. It has all the files neccesary for the application to be designed and run.
 
 ## Team Members:
 
